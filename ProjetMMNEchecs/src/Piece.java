@@ -1,5 +1,4 @@
-public abstract class Piece {
-
-    public void mouvement(){};
-    public void manger(){};
+public interface Piece {
+    void mouvement();
+    void manger();
 }

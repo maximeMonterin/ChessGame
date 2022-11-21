@@ -1,2 +1,12 @@
-public class Pion extends Piece{
+public class Pion implements Piece{
+
+    @Override
+    public void mouvement() {
+
+    }
+
+    @Override
+    public void manger() {
+
+    }
 }

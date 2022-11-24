@@ -68,7 +68,7 @@ public class Echiquier extends JComponent {
     public void paintComponent(Graphics g){
         Graphics2D plateauReel= (Graphics2D) g;
 
-        int tailleCase = 80;
+        int tailleCase = 90;
         boolean couleur=true;
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -82,6 +82,18 @@ public class Echiquier extends JComponent {
             }
             couleur=!couleur;
         }
+
+        int legendeChiffres;
+        for(int i=1;i<9;i++){
+            plateauReel.setPaint(Color.BLACK);
+            plateauReel.drawString("" + i,tailleCase/2, (int) (tailleCase*(10-i-0.5)));
+        }
+
+        for(int j=0;j<8;j++){
+            plateauReel.setPaint(Color.BLACK);
+            plateauReel.drawString(String.valueOf((char)('A'+ j)), (int) (tailleCase*(j+1.5)), (int) (tailleCase * 9.5));
+        }
+
         plateauReel.setPaint(Color.BLUE);
         plateauReel.setStroke(new BasicStroke(2));
         plateauReel.draw(new Rectangle2D.Double(tailleCase,tailleCase,tailleCase*8,tailleCase*8));

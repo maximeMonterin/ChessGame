@@ -13,18 +13,18 @@ public class Pion implements Piece{
         List<Case> res = new ArrayList<>();
         int posi = case_de_la_piece.getPosx();
         if(couleur == 0){ // couleur blanc, en bas
-            res.add(new Case(0, posi+1, case_de_la_piece.getPosy()));
+            res.add(new Case(posi+1, case_de_la_piece.getPosy()));
             if(posi == 2) {
-                res.add(new Case(0, posi + 2, case_de_la_piece.getPosy()));
+                res.add(new Case(posi + 2, case_de_la_piece.getPosy()));
             }
         }
         else if(couleur ==1){ // couleur noir , en haut
-            res.add (new Case(0, posi+1, case_de_la_piece.getPosy()));
+            res.add (new Case(posi+1, case_de_la_piece.getPosy()));
             if(posi == 2) {
-                res.add(new Case(0, posi + 2, case_de_la_piece.getPosy()));
+                res.add(new Case(posi + 2, case_de_la_piece.getPosy()));
             }
         }
-        return res;ter
+        return res;
     }
 
     @Override

@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pion implements Piece{
+public class Pion extends Piece{
     private int couleur;
+    private int posx;
+    private char posy;
 
-    public Pion(int couleur) {
+    public Pion(int couleur, int posx, char posy) {
+        super(new Case(posx, posy));
         this.couleur = couleur;
+        this.posx = posx;
+        this.posy = posy;
     }
 
     @Override

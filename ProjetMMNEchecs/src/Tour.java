@@ -1,10 +1,15 @@
 import java.util.List;
 
-public class Tour implements Piece{
+public class Tour extends Piece{
     private int couleur;
+    private int posx;
+    private char posy;
 
-    public Tour(int couleur) {
+    public Tour(int couleur, int posx, char posy) {
+        super(new Case(posx, posy));
         this.couleur = couleur;
+        this.posx = posx;
+        this.posy = posy;
     }
 
     @Override

@@ -1,7 +1,15 @@
 import java.util.List;
 
-public interface Piece {
-    List<Case> mouvement(Case case_de_la_piece);
+public abstract class Piece {
+    protected Case position;
 
-    void manger();
+    public Piece(Case position) {
+        this.position = position;
+    }
+    abstract List<Case> mouvement(Case case_de_la_piece);
+
+    abstract void manger();
+    public Case getPosition() {
+        return position;
+    }
 }

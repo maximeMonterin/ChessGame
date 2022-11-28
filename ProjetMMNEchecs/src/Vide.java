@@ -1,7 +1,10 @@
+import java.util.List;
+
 public class Vide implements Piece {
     @Override
-    public void mouvement() {
+    public List<Case> mouvement(Case case_de_la_piece) {
 
+        return null;
     }
 
     @Override

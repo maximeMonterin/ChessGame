@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Roi implements Piece{
     private int couleur;
 
@@ -6,7 +8,8 @@ public class Roi implements Piece{
     }
 
     @Override
-    public void mouvement() {
+    public List<Case> mouvement(Case case_de_la_piece) {
+        return null;
     }
 
     @Override

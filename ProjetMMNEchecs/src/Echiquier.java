@@ -101,60 +101,60 @@ public class Echiquier extends JComponent {
                 if(plateau.get(i).get(j) instanceof Pion){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/pion.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/pion.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image pion non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
 
                 }else if(plateau.get(i).get(j) instanceof Tour){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/tour.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/tour.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image tour non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave,(int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave,(j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
                 }else if(plateau.get(i).get(j) instanceof Cavalier){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/cheval.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/cheval.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image cheval non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
 
                 }else if(plateau.get(i).get(j) instanceof Fou){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/fou.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/fou.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image fou non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
                 }else if(plateau.get(i).get(j) instanceof Roi){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/roi.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/roi.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image roi non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
 
                 }else if(plateau.get(i).get(j) instanceof Reine){
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/reine.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/reine.png"));
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            System.out.println("err: image reine non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
+                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
                 }
             }
         }

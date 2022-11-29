@@ -1,10 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Echiquier extends JComponent {
     private List<List<Piece>> plateau;
@@ -22,6 +24,9 @@ public class Echiquier extends JComponent {
         setReines();
         setRois();
     }
+
+    BufferedImage iconeNave;
+
     public void setPions(){
         for(int i=0;i<8;i++){
             plateau.get(1).set(i,new Pion(0,1, (char) ('A' + i) ));
@@ -92,7 +97,73 @@ public class Echiquier extends JComponent {
             plateauReel.setPaint(Color.BLACK);
             plateauReel.drawString(String.valueOf((char)('A'+ j)), (int) (tailleCase*(j+1.45)), (int) (tailleCase * 9));
         }
+
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(plateau.get(i).get(j) instanceof Pion){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/pion.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 0, 0, this);
+
+                }else if(plateau.get(i).get(j) instanceof Tour){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/tour.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 30, 0, this);
+                }else if(plateau.get(i).get(j) instanceof Cavalier){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/cheval.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 60, 0, this);
+
+                }else if(plateau.get(i).get(j) instanceof Fou){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/fou.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 90, 0, this);
+                }else if(plateau.get(i).get(j) instanceof Roi){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/roi.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 120, 0, this);
+
+                }else if(plateau.get(i).get(j) instanceof Reine){
+                    {
+                        try {
+                            iconeNave = ImageIO.read(new FileInputStream("images/blanc/reine.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    plateauReel.drawImage(iconeNave, 150, 0, this);
+                }
+            }
+
+        }
+        
         plateauReel.dispose();
+
     }
 
     public String getNomPiece(int positionX, int positionY){

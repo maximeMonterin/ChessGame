@@ -41,7 +41,7 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
             System.out.println("Hors Plateau");
         }
     }
-    
+
     @Override
     public void mousePressed(MouseEvent e) {
 

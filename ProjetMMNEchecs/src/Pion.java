@@ -14,19 +14,24 @@ public class Pion extends Piece{
     }
 
     @Override
-    public List<Case> mouvement(Case case_de_la_piece){
+    String getNom() {
+        return "Pion";
+    }
+
+    @Override
+    public List<Case> mouvement(){
         List<Case> res = new ArrayList<>();
-        int posi = case_de_la_piece.getPosx();
+        int posi = position.getPosx();
         if(couleur == 0){ // couleur blanc, en bas
-            res.add(new Case(posi+1, case_de_la_piece.getPosy()));
+            res.add(new Case(posi+1, position.getPosy()));
             if(posi == 2) {
-                res.add(new Case(posi + 2, case_de_la_piece.getPosy()));
+                res.add(new Case(posi + 2, position.getPosy()));
             }
         }
         else if(couleur ==1){ // couleur noir , en haut
-            res.add (new Case(posi+1, case_de_la_piece.getPosy()));
+            res.add (new Case(posi+1, position.getPosy()));
             if(posi == 2) {
-                res.add(new Case(posi + 2, case_de_la_piece.getPosy()));
+                res.add(new Case(posi + 2, position.getPosy()));
             }
         }
         return res;

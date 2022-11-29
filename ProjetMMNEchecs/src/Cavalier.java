@@ -13,7 +13,12 @@ public class Cavalier extends Piece{
     }
 
     @Override
-    public List<Case> mouvement(Case case_de_la_piece) {
+    String getNom() {
+        return "Cavalier";
+    }
+
+    @Override
+    public List<Case> mouvement() {
 
         return null;
     }

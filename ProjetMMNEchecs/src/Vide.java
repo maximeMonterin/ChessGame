@@ -8,8 +8,14 @@ public class Vide extends Piece {
         this.posx = posx;
         this.posy = posy;
     }
+
     @Override
-    public List<Case> mouvement(Case case_de_la_piece) {
+    String getNom() {
+        return "Vide";
+    }
+
+    @Override
+    public List<Case> mouvement() {
 
         return null;
     }

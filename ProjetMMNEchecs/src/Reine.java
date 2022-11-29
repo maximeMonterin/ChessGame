@@ -14,7 +14,12 @@ public class Reine extends Piece{
     }
 
     @Override
-    public List<Case> mouvement(Case case_de_la_piece) {
+    String getNom() {
+        return "Reine";
+    }
+
+    @Override
+    public List<Case> mouvement() {
 
         return null;
     }

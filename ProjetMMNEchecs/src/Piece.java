@@ -6,10 +6,15 @@ public abstract class Piece {
     public Piece(Case position) {
         this.position = position;
     }
-    abstract List<Case> mouvement(Case case_de_la_piece);
+
+    abstract String getNom();
+
+    abstract List<Case> mouvement();
 
     abstract void manger();
     public Case getPosition() {
         return position;
     }
+
+
 }

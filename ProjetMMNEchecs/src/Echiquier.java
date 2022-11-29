@@ -108,7 +108,7 @@ public class Echiquier extends JComponent {
                     } catch (IOException e) {
                         System.out.println("err: image pion non trouvée");
                     }
-                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave, (int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
                 }
 
                 else if(plateau.get(i).get(j) instanceof Tour){
@@ -121,7 +121,7 @@ public class Echiquier extends JComponent {
                             System.out.println("err: image tour non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave,(j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave,(int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
                 }
 
                 else if(plateau.get(i).get(j) instanceof Cavalier){
@@ -134,7 +134,7 @@ public class Echiquier extends JComponent {
                             System.out.println("err: image cavalier non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave, (int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
 
                 }
 
@@ -148,7 +148,7 @@ public class Echiquier extends JComponent {
                             System.out.println("err: image fou non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave, (int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
 
                 }
 
@@ -162,7 +162,7 @@ public class Echiquier extends JComponent {
                             System.out.println("err: image roi non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave, (int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
 
                 }
 
@@ -176,7 +176,7 @@ public class Echiquier extends JComponent {
                             System.out.println("err: image reine non trouvée");
                         }
                     }
-                    plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                    plateauReel.drawImage(iconeNave, (int)((j+1.05)*tailleCase), (int)((i+0.55)*tailleCase), this);
                 }
             }
         }

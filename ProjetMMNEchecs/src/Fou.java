@@ -3,9 +3,9 @@ import java.util.List;
 public class Fou extends Piece{
     private int couleur;
     private int posx;
-    private char posy;
+    private int posy;
 
-    public Fou(int couleur, int posx, char posy) {
+    public Fou(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
         this.posx = posx;

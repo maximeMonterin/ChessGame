@@ -2,8 +2,8 @@ import java.util.List;
 
 public class Vide extends Piece {
     private int posx;
-    private char posy;
-    public Vide(int posx, char posy) {
+    private int posy;
+    public Vide(int posx, int posy) {
         super(new Case(posx, posy), posx, posy);
         this.posx = posx;
         this.posy = posy;

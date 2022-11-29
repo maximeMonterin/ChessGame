@@ -28,43 +28,43 @@ public class Echiquier extends JComponent {
     }
     public void setPions(){
         for(int i=0;i<8;i++){
-            plateau.get(1).set(i,new Pion(0,1, (char) ('A' + i) ));
-            plateau.get(6).set(i,new Pion(1,6, (char) ('A' + i)));
+            plateau.get(1).set(i,new Pion(0,1, i ));
+            plateau.get(6).set(i,new Pion(1,6, i));
         }
     }
     public void setTours(){
-        plateau.get(0).set(0,new Tour(0, 0, 'A'));
-        plateau.get(0).set(7,new Tour(0, 0, 'H'));
-        plateau.get(7).set(0,new Tour(1, 7, 'A'));
-        plateau.get(7).set(7,new Tour(1, 7, 'H'));
+        plateau.get(0).set(0,new Tour(0, 0, 0));
+        plateau.get(0).set(7,new Tour(0, 0, 7));
+        plateau.get(7).set(0,new Tour(1, 7, 0));
+        plateau.get(7).set(7,new Tour(1, 7, 7));
     }
     public void setCavaliers(){
-        plateau.get(0).set(1,new Cavalier(0, 0, 'B'));
-        plateau.get(0).set(6,new Cavalier(0, 0, 'G'));
-        plateau.get(7).set(1,new Cavalier(1, 7, 'B'));
-        plateau.get(7).set(6,new Cavalier(1, 7, 'G'));
+        plateau.get(0).set(1,new Cavalier(0, 0, 1));
+        plateau.get(0).set(6,new Cavalier(0, 0, 6));
+        plateau.get(7).set(1,new Cavalier(1, 7, 1));
+        plateau.get(7).set(6,new Cavalier(1, 7, 6));
     }
     public void setFous(){
-        plateau.get(0).set(2,new Fou(0, 0, 'C'));
-        plateau.get(0).set(5,new Fou(0, 0, 'F'));
-        plateau.get(7).set(2,new Fou(1, 7, 'C'));
-        plateau.get(7).set(5,new Fou(1, 7, 'F'));
+        plateau.get(0).set(2,new Fou(0, 0, 2));
+        plateau.get(0).set(5,new Fou(0, 0, 5));
+        plateau.get(7).set(2,new Fou(1, 7, 2));
+        plateau.get(7).set(5,new Fou(1, 7, 5));
     }
     public void setRois(){
-        plateau.get(0).set(4,new Roi(0,0, 'E'));
-        plateau.get(7).set(4,new Roi(1,7, 'E'));
+        plateau.get(0).set(4,new Roi(0,0, 4));
+        plateau.get(7).set(4,new Roi(1,7, 4));
     }
     public void setReines(){
-        plateau.get(0).set(3,new Reine(0,0, 'D'));
-        plateau.get(7).set(3,new Reine(1,7, 'D'));
+        plateau.get(0).set(3,new Reine(0,0, 3));
+        plateau.get(7).set(3,new Reine(1,7, 3));
     }
     public void setVides(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(j%2==0){
-                    plateau.get(j).add(new Vide(j, (char) ('A'+ i)));
+                    plateau.get(j).add(new Vide(j, i));
                 }else{
-                    plateau.get(j).add(new Vide(j, (char) ('A'+ i)));
+                    plateau.get(j).add(new Vide(j, i));
                 }
             }
         }
@@ -185,7 +185,7 @@ public class Echiquier extends JComponent {
     }
 
     public List<Case> getListeCase(int positionX, int positionY){
-       return plateau.get(positionX).get(positionY).mouvement();
+       return (plateau.get(positionX).get(positionY)).mouvement();
     }
     public List<String> listeCaseToString(List<Case> c){
         List<String> cases= new ArrayList<>();
@@ -196,13 +196,19 @@ public class Echiquier extends JComponent {
         }
         return cases;
     }
-    public void bouger(int positionX, int positionY, List<Case> oldMouvementCases){
+    public void bouger(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
         Case nextCase = this.getCurrentCase(positionX, positionY);
         if(oldMouvementCases.contains(nextCase)){
             System.out.println("Pièce déplacée en " + nextCase.toString());
-            plateau.get(positionX).get(positionY).setPosx(nextCase.getPosx());
-            plateau.get(positionX).get(positionY).setPosy(nextCase.getPosy());
-            System.out.println(plateau.get(positionX).get(positionY).toString());
+            plateau.get(savePosX).get(savePosY).setPosition(nextCase);
+
+            plateau.get(savePosX).get(savePosY).setPosx(positionX);
+            plateau.get(savePosX).get(savePosY).setPosy(positionY);
+
+            plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
+            plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
+
+
         } else {
             System.out.println("Vous ne pouvez pas vous déplacer ici");
         }

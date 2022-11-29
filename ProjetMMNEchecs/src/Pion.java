@@ -4,7 +4,7 @@ import java.util.List;
 public class Pion extends Piece{
     private int couleur;
 
-    public Pion(int couleur, int posx, char posy) {
+    public Pion(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
     }

@@ -2,9 +2,9 @@ import java.util.Objects;
 
 public class Case {
     private final int posx;
-    private final char posy;
+    private final int posy;
 
-    public Case(int posx, char posy) {
+    public Case(int posx, int posy) {
         this.posx = posx;
         this.posy = posy;
     }
@@ -13,7 +13,7 @@ public class Case {
         return posx;
     }
 
-    public char getPosy() {
+    public int getPosy() {
         return posy;
     }
 

@@ -3,10 +3,10 @@ import java.util.List;
 public class Reine extends Piece{
     private int couleur;
     private int posx;
-    private char posy;
+    private int posy;
     private Case caseReine;
 
-    public Reine(int couleur, int posx, char posy) {
+    public Reine(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
         this.posx = posx;

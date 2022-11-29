@@ -2,10 +2,10 @@ import java.util.List;
 
 public abstract class Piece {
     private int posx;
-    private char posy;
+    private int posy;
     protected Case position;
 
-    public Piece(Case position, int posx, char posy) {
+    public Piece(Case position, int posx, int posy) {
         this.position = position;
         this.posx = posx;
         this.posy = posy;
@@ -20,6 +20,10 @@ public abstract class Piece {
         return position;
     }
 
+    public void setPosition(Case position) {
+        this.position = position;
+    }
+
     public int getPosx() {
         return posx;
     }
@@ -28,11 +32,11 @@ public abstract class Piece {
         this.posx = posx;
     }
 
-    public char getPosy() {
+    public int getPosy() {
         return posy;
     }
 
-    public void setPosy(char posy) {
+    public void setPosy(int posy) {
         this.posy = posy;
     }
 }

@@ -184,10 +184,10 @@ public class Echiquier extends JComponent {
         plateauReel.dispose();
     }
 
-    public List<Case> getNomPiece(int positionX, int positionY){
+    public List<Case> getListeCase(int positionX, int positionY){
        return plateau.get(positionX).get(positionY).mouvement();
     }
-    public List<String> getListePiece(List<Case> c){
+    public List<String> listeCaseToString(List<Case> c){
         List<String> cases= new ArrayList<>();
         Iterator<Case> it= c.iterator();
         while(it.hasNext()){
@@ -197,16 +197,18 @@ public class Echiquier extends JComponent {
         return cases;
     }
     public void bouger(int positionX, int positionY, List<Case> oldMouvementCases){
-        Case nextCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
+        Case nextCase = this.getCurrentCase(positionX, positionY);
         if(oldMouvementCases.contains(nextCase)){
-            System.out.println("Vous ne pouvez pas vous déplacer ici");
-        } else {
             System.out.println("Pièce déplacée en " + nextCase.toString());
+            plateau.get(positionX).get(positionY).setPosx(nextCase.getPosx());
+            plateau.get(positionX).get(positionY).setPosy(nextCase.getPosy());
+            System.out.println(plateau.get(positionX).get(positionY).toString());
+        } else {
+            System.out.println("Vous ne pouvez pas vous déplacer ici");
         }
     }
     public Case getCurrentCase(int positionX, int positionY){
         Case currCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
-        System.out.println("Vous avez selectionné la case = " + currCase.toString());
 
         return currCase;
     }

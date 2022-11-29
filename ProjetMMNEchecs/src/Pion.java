@@ -45,4 +45,10 @@ public class Pion extends Piece{
         return couleur;
     }
 
+    @Override
+    public String toString() {
+        return "Pion{" +
+                "position=" + position +
+                '}';
+    }
 }

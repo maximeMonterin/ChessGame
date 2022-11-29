@@ -1,14 +1,17 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Affichage extends JFrame implements ActionListener, MouseListener {
 
     private JPanel panelMain;
     private  Echiquier plateau;
+    List<Case> moveL;
+    Case currCase;
 
     int cpt = 0;
     private int savePosX;
@@ -34,19 +37,17 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         ++cpt;
-        //System.out.println(e.getX());
-        //System.out.println(e.getY());
         int positionX= (e.getY()-80);
         int positionY= (e.getX()-100);
-        //System.out.println(positionX);
-        //System.out.println(positionY);
         if(positionX>=0 && positionY>=0 && positionX<=800 && positionY<=800){
-            plateau.getCurrentCase(positionX/100,positionY/100);
             if(cpt % 2 != 0){
+                currCase = plateau.getCurrentCase(positionX/100,positionY/100);
+                System.out.println("Vous avez selectionné la case = " + currCase.toString());
                 savePosX = positionX/100;
                 savePosY = positionY/100;
+                moveL = plateau.getListeCase(savePosX, savePosY);
             } else {
-                plateau.bouger(positionX/100, positionY/100, plateau.getNomPiece(savePosX, savePosY));
+                plateau.bouger(positionX/100, positionY/100, moveL);
             }
         }else{
             System.out.println("Hors Plateau");

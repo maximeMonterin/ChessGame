@@ -29,14 +29,14 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX());
-        System.out.println(e.getY());
+        //System.out.println(e.getX());
+        //System.out.println(e.getY());
         int positionX= (e.getY()-80);
         int positionY= (e.getX()-100);
-        System.out.println(positionX);
-        System.out.println(positionY);
+        //System.out.println(positionX);
+        //System.out.println(positionY);
         if(positionX>=0 && positionY>=0 && positionX<=800 && positionY<=800){
-            System.out.println(plateau.getNomPiece(positionX/100,positionY/100));
+            System.out.println(plateau.getListePiece(plateau.getNomPiece(positionX/100,positionY/100)));
         }else{
             System.out.println("Hors Plateau");
         }

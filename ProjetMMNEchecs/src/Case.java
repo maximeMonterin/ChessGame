@@ -15,4 +15,9 @@ public class Case {
         return posy;
     }
 
+    @Override
+    public String toString() {
+        return "Case{"+ posx +", " + posy +
+                '}';
+    }
 }

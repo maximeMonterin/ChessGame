@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Echiquier extends JComponent {
@@ -183,8 +184,17 @@ public class Echiquier extends JComponent {
         plateauReel.dispose();
     }
 
-    public String getNomPiece(int positionX, int positionY){
-       return plateau.get(positionX).get(positionY).getNom();
+    public List<Case> getNomPiece(int positionX, int positionY){
+       return plateau.get(positionX).get(positionY).mouvement();
+    }
+    public List<String> getListePiece(List<Case> c){
+        List<String> cases= new ArrayList<>();
+        Iterator<Case> it= c.iterator();
+        while(it.hasNext()){
+            Case toto= it.next();
+            cases.add(toto.toString());
+        }
+        return cases;
     }
 }
 

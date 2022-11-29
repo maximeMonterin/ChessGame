@@ -21,17 +21,16 @@ public class Pion extends Piece{
     @Override
     public List<Case> mouvement(){
         List<Case> res = new ArrayList<>();
-        int posi = position.getPosx();
-        if(couleur == 0){ // couleur blanc, en bas
-            res.add(new Case(posi+1, position.getPosy()));
-            if(posi == 2) {
-                res.add(new Case(posi + 2, position.getPosy()));
+        if(couleur == 1){ // couleur noir, en bas
+            res.add(new Case(8-(posx -1), posy));
+            if(posx == 6) {
+                res.add(new Case(8-(posx - 2), posy));
             }
         }
-        else if(couleur ==1){ // couleur noir , en haut
-            res.add (new Case(posi+1, position.getPosy()));
-            if(posi == 2) {
-                res.add(new Case(posi + 2, position.getPosy()));
+        else if(couleur ==0){ // couleur blanc , en haut
+            res.add (new Case(8-(posx +1), posy));
+            if(posx == 1) {
+                res.add(new Case(8-(posx + 2), posy));
             }
         }
         return res;

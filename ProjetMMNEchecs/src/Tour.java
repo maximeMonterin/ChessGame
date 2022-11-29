@@ -27,4 +27,8 @@ public class Tour extends Piece{
     public void manger() {
 
     }
+
+    public int getCouleur() {
+        return couleur;
+    }
 }

@@ -28,4 +28,8 @@ public class Reine extends Piece{
     public void manger() {
 
     }
+
+    public int getCouleur() {
+        return couleur;
+    }
 }

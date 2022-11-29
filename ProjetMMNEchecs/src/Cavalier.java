@@ -28,5 +28,9 @@ public class Cavalier extends Piece{
 
     }
 
+    public int getCouleur() {
+        return couleur;
+    }
+
 
 }

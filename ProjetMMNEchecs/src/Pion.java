@@ -41,4 +41,8 @@ public class Pion extends Piece{
     public void manger() {
 
     }
+
+    public int getCouleur() {
+        return couleur;
+    }
 }

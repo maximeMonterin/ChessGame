@@ -26,4 +26,8 @@ public class Roi extends Piece{
     public void manger() {
 
     }
+
+    public int getCouleur() {
+        return couleur;
+    }
 }

@@ -96,60 +96,82 @@ public class Echiquier extends JComponent {
             plateauReel.drawString(String.valueOf((char)('A'+ j)), (int) (tailleCase*(j+1.45)), (int) (tailleCase * 9));
         }
 
+        String couleurPiece = "";
+
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(plateau.get(i).get(j) instanceof Pion){
-                    {
-                        try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/pion.png"));
-                        } catch (IOException e) {
-                            System.out.println("err: image pion non trouvée");
-                        }
+                    if(((Pion) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
+                    try {
+                        iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/pion.png"));
+                    } catch (IOException e) {
+                        System.out.println("err: image pion non trouvée");
                     }
                     plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
+                }
 
-                }else if(plateau.get(i).get(j) instanceof Tour){
+                else if(plateau.get(i).get(j) instanceof Tour){
+                    if(((Tour) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/tour.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/tour.png"));
                         } catch (IOException e) {
                             System.out.println("err: image tour non trouvée");
                         }
                     }
                     plateauReel.drawImage(iconeNave,(j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
-                }else if(plateau.get(i).get(j) instanceof Cavalier){
+                }
+
+                else if(plateau.get(i).get(j) instanceof Cavalier){
+                    if(((Cavalier) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/cheval.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/cheval.png"));
                         } catch (IOException e) {
-                            System.out.println("err: image cheval non trouvée");
+                            System.out.println("err: image cavalier non trouvée");
                         }
                     }
                     plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
 
-                }else if(plateau.get(i).get(j) instanceof Fou){
+                }
+
+                else if(plateau.get(i).get(j) instanceof Fou){
+                    if(((Fou) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/fou.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/fou.png"));
                         } catch (IOException e) {
                             System.out.println("err: image fou non trouvée");
                         }
                     }
                     plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
-                }else if(plateau.get(i).get(j) instanceof Roi){
+
+                }
+
+                else if(plateau.get(i).get(j) instanceof Roi){
+                    if(((Roi) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/roi.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/roi.png"));
                         } catch (IOException e) {
                             System.out.println("err: image roi non trouvée");
                         }
                     }
                     plateauReel.drawImage(iconeNave, (j+1)*tailleCase, (int)((i+0.5)*tailleCase), this);
 
-                }else if(plateau.get(i).get(j) instanceof Reine){
+                }
+
+                else if(plateau.get(i).get(j) instanceof Reine){
+                    if(((Reine) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/blanc/reine.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/reine.png"));
                         } catch (IOException e) {
                             System.out.println("err: image reine non trouvée");
                         }

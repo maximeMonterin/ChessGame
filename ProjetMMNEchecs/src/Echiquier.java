@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Echiquier extends JComponent {
     private List<List<Piece>> plateau;
+    private BufferedImage iconeNave;
     public Echiquier() {
         plateau = new ArrayList<>();
         for(int i=0;i<8;i++){
@@ -24,9 +25,6 @@ public class Echiquier extends JComponent {
         setReines();
         setRois();
     }
-
-    BufferedImage iconeNave;
-
     public void setPions(){
         for(int i=0;i<8;i++){
             plateau.get(1).set(i,new Pion(0,1, (char) ('A' + i) ));
@@ -108,7 +106,7 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 0, 0, this);
+                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
 
                 }else if(plateau.get(i).get(j) instanceof Tour){
                     {
@@ -118,7 +116,7 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 30, 0, this);
+                    plateauReel.drawImage(iconeNave,(int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
                 }else if(plateau.get(i).get(j) instanceof Cavalier){
                     {
                         try {
@@ -127,7 +125,7 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 60, 0, this);
+                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
 
                 }else if(plateau.get(i).get(j) instanceof Fou){
                     {
@@ -137,7 +135,7 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 90, 0, this);
+                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
                 }else if(plateau.get(i).get(j) instanceof Roi){
                     {
                         try {
@@ -146,7 +144,7 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 120, 0, this);
+                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
 
                 }else if(plateau.get(i).get(j) instanceof Reine){
                     {
@@ -156,14 +154,11 @@ public class Echiquier extends JComponent {
                             e.printStackTrace();
                         }
                     }
-                    plateauReel.drawImage(iconeNave, 150, 0, this);
+                    plateauReel.drawImage(iconeNave, (int)(j+1.5)*tailleCase, (int)(i+1.5)*tailleCase, this);
                 }
             }
-
         }
-        
         plateauReel.dispose();
-
     }
 
     public String getNomPiece(int positionX, int positionY){

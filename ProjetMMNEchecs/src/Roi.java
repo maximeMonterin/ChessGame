@@ -6,7 +6,7 @@ public class Roi extends Piece{
     private char posy;
 
     public Roi(int couleur, int posx, char posy) {
-        super(new Case(posx, posy));
+        super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
         this.posx = posx;
         this.posy = posy;

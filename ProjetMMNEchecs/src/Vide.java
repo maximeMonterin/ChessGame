@@ -4,7 +4,7 @@ public class Vide extends Piece {
     private int posx;
     private char posy;
     public Vide(int posx, char posy) {
-        super(new Case(posx, posy));
+        super(new Case(posx, posy), posx, posy);
         this.posx = posx;
         this.posy = posy;
     }

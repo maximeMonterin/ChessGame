@@ -7,7 +7,7 @@ public class Reine extends Piece{
     private Case caseReine;
 
     public Reine(int couleur, int posx, char posy) {
-        super(new Case(posx, posy));
+        super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
         this.posx = posx;
         this.posy = posy;

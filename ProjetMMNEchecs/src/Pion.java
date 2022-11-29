@@ -3,14 +3,10 @@ import java.util.List;
 
 public class Pion extends Piece{
     private int couleur;
-    private int posx;
-    private char posy;
 
     public Pion(int couleur, int posx, char posy) {
-        super(new Case(posx, posy));
+        super(new Case(posx, posy), posx, posy);
         this.couleur = couleur;
-        this.posx = posx;
-        this.posy = posy;
     }
 
     @Override
@@ -22,18 +18,22 @@ public class Pion extends Piece{
     public List<Case> mouvement(){
         List<Case> res = new ArrayList<>();
         if(couleur == 1){ // couleur noir, en bas
-            res.add(new Case(8-(posx -1), posy));
-            if(posx == 6) {
-                res.add(new Case(8-(posx - 2), posy));
+            res.add(new Case(this.getPosx()-1, this.getPosy()));
+            if(this.getPosx() == 6) {
+                res.add(new Case(this.getPosx() - 2, this.getPosy()));
             }
         }
         else if(couleur ==0){ // couleur blanc , en haut
-            res.add (new Case(8-(posx +1), posy));
-            if(posx == 1) {
-                res.add(new Case(8-(posx + 2), posy));
+            res.add (new Case(this.getPosx() +1, this.getPosy()));
+            if(this.getPosx() == 1) {
+                res.add(new Case(this.getPosx() + 2, this.getPosy()));
             }
         }
         return res;
+    }
+
+    public void bouger(){
+
     }
 
     @Override
@@ -44,4 +44,5 @@ public class Pion extends Piece{
     public int getCouleur() {
         return couleur;
     }
+
 }

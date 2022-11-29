@@ -196,6 +196,20 @@ public class Echiquier extends JComponent {
         }
         return cases;
     }
+    public void bouger(int positionX, int positionY, List<Case> oldMouvementCases){
+        Case nextCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
+        if(oldMouvementCases.contains(nextCase)){
+            System.out.println("Vous ne pouvez pas vous déplacer ici");
+        } else {
+            System.out.println("Pièce déplacée en " + nextCase.toString());
+        }
+    }
+    public Case getCurrentCase(int positionX, int positionY){
+        Case currCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
+        System.out.println("Vous avez selectionné la case = " + currCase.toString());
+
+        return currCase;
+    }
 }
 
 

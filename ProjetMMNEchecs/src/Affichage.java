@@ -10,6 +10,10 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
     private JPanel panelMain;
     private  Echiquier plateau;
 
+    int cpt = 0;
+    private int savePosX;
+    private int savePosY;
+
     public Affichage(){
         plateau= new Echiquier();
         plateau.setBounds(0,0,910,910);
@@ -29,6 +33,7 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        ++cpt;
         //System.out.println(e.getX());
         //System.out.println(e.getY());
         int positionX= (e.getY()-80);
@@ -36,7 +41,13 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
         //System.out.println(positionX);
         //System.out.println(positionY);
         if(positionX>=0 && positionY>=0 && positionX<=800 && positionY<=800){
-            System.out.println(plateau.getListePiece(plateau.getNomPiece(positionX/100,positionY/100)));
+            plateau.getCurrentCase(positionX/100,positionY/100);
+            if(cpt % 2 != 0){
+                savePosX = positionX/100;
+                savePosY = positionY/100;
+            } else {
+                plateau.bouger(positionX/100, positionY/100, plateau.getNomPiece(savePosX, savePosY));
+            }
         }else{
             System.out.println("Hors Plateau");
         }

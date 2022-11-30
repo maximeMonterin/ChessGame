@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Roi extends Piece{
@@ -19,7 +20,38 @@ public class Roi extends Piece{
 
     @Override
     public List<Case> mouvement() {
-        return null;
+
+        List<Case> res = new ArrayList<>();
+        if(this.getPosy()-1>=0){
+            res.add(new Case(this.getPosx(), this.getPosy()-1));
+        }
+        if(this.getPosy()+1<=7){
+            res.add(new Case(this.getPosx(), this.getPosy()+1));
+        }
+
+        if(this.getPosx()+1<=7){
+            res.add(new Case(this.getPosx()+1, this.getPosy()));
+
+            if(this.getPosy()-1>=0){
+                res.add(new Case(this.getPosx()+1, this.getPosy()-1));
+            }
+            if(this.getPosy()+1<=7){
+                res.add(new Case(this.getPosx()+1, this.getPosy()+1));
+            }
+        }
+
+        if(this.getPosx()-1>=0){
+            res.add(new Case(this.getPosx()-1, this.getPosy()));
+
+            if(this.getPosy()-1>=0){
+                res.add(new Case(this.getPosx()-1, this.getPosy()-1));
+            }
+            if(this.getPosy()+1<=7){
+                res.add(new Case(this.getPosx()-1, this.getPosy()+1));
+            }
+        }
+
+        return res;
     }
 
     @Override

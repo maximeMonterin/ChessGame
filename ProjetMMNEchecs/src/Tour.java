@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tour extends Piece{
@@ -20,7 +21,16 @@ public class Tour extends Piece{
     @Override
     public List<Case> mouvement() {
 
-        return null;
+        List<Case> res = new ArrayList<>();
+        for(int i=0;i<8;i++){
+            if(i!=this.getPosx()) {
+                res.add(new Case(i, this.getPosy()));
+            }
+            if(i!=this.getPosx()) {
+                res.add(new Case(this.getPosx(), i));
+            }
+        }
+        return res;
     }
 
     @Override

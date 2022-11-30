@@ -10,10 +10,10 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
 
     private JPanel panelMain;
     private  Echiquier plateau;
-    List<Case> oldMouvementCases;
-    Case currCase;
+    private List<Case> oldMouvementCases;
+    private Case currCase;
 
-    int cpt = 0;
+    private int cpt = 0;
     private int savePosX;
     private int savePosY;
 
@@ -48,7 +48,9 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
                 oldMouvementCases = plateau.getListeCase(savePosX, savePosY);
             } else {
                 plateau.bouger(positionX/100, positionY/100, oldMouvementCases, savePosX, savePosY);
-                oldMouvementCases.clear();
+                if(!oldMouvementCases.isEmpty()){
+                    oldMouvementCases.clear();
+                }
             }
         }else{
             System.out.println("Hors Plateau");

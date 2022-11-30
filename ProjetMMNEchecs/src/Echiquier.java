@@ -105,7 +105,7 @@ public class Echiquier extends JComponent {
                     if(((Pion) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     try {
-                        iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/pion.png"));
+                        iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/pion.png"));
                     } catch (IOException e) {
                         System.out.println("err: image pion non trouvée");
                     }
@@ -117,7 +117,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/tour.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/tour.png"));
                         } catch (IOException e) {
                             System.out.println("err: image tour non trouvée");
                         }
@@ -130,7 +130,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/cheval.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/cheval.png"));
                         } catch (IOException e) {
                             System.out.println("err: image cavalier non trouvée");
                         }
@@ -144,7 +144,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/fou.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/fou.png"));
                         } catch (IOException e) {
                             System.out.println("err: image fou non trouvée");
                         }
@@ -158,7 +158,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/roi.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/roi.png"));
                         } catch (IOException e) {
                             System.out.println("err: image roi non trouvée");
                         }
@@ -172,7 +172,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/reine.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/reine.png"));
                         } catch (IOException e) {
                             System.out.println("err: image reine non trouvée");
                         }
@@ -198,20 +198,18 @@ public class Echiquier extends JComponent {
     }
     public void bouger(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
         Case nextCase = this.getCurrentCase(positionX, positionY);
-        if(oldMouvementCases.contains(nextCase)){
-            System.out.println("Pièce déplacée en " + nextCase.toString());
-            plateau.get(savePosX).get(savePosY).setPosition(nextCase);
+            if (oldMouvementCases.contains(nextCase)) {
+                System.out.println("Pièce déplacée en " + nextCase.toString());
+                plateau.get(savePosX).get(savePosY).setPosition(nextCase);
 
-            plateau.get(savePosX).get(savePosY).setPosx(positionX);
-            plateau.get(savePosX).get(savePosY).setPosy(positionY);
+                plateau.get(savePosX).get(savePosY).setPosx(positionX);
+                plateau.get(savePosX).get(savePosY).setPosy(positionY);
 
-            plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
-            plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
-
-
-        } else {
-            System.out.println("Vous ne pouvez pas vous déplacer ici");
-        }
+                plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
+                plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
+            } else {
+                System.out.println("Vous ne pouvez pas vous déplacer ici");
+            }
     }
     public Case getCurrentCase(int positionX, int positionY){
         Case currCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vide extends Piece {
@@ -17,7 +18,9 @@ public class Vide extends Piece {
     @Override
     public List<Case> mouvement() {
 
-        return null;
+        List<Case> res = new ArrayList<>();
+        res.add(new Case(this.getPosx(), this.getPosy()));
+        return res;
     }
 
     @Override

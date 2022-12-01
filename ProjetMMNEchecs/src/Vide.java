@@ -24,7 +24,7 @@ public class Vide extends Piece {
     }
 
     @Override
-    public void manger() {
-
+    public Boolean manger(Piece next) {
+        return true;
     }
 }

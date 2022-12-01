@@ -2,11 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pion extends Piece{
-    private int couleur;
+
+    private int posx;
+
+    private int posy;
 
     public Pion(int couleur, int posx, int posy) {
-        super(new Case(posx, posy), posx, posy);
-        this.couleur = couleur;
+        super(new Case(posx, posy), posx, posy,couleur);
+        this.posx = posx;
+        this.posy = posy;
     }
 
     @Override
@@ -22,12 +26,16 @@ public class Pion extends Piece{
             if(this.getPosx() == 6) {
                 res.add(new Case(this.getPosx() - 2, this.getPosy()));
             }
+            res.add(new Case(this.getPosx()-1, this.getPosy()+1));
+            res.add(new Case(this.getPosx()-1, this.getPosy()-1));
         }
         else if(couleur ==0){ // couleur blanc , en haut
             res.add (new Case(this.getPosx() +1, this.getPosy()));
             if(this.getPosx() == 1) {
                 res.add(new Case(this.getPosx() + 2, this.getPosy()));
             }
+            res.add(new Case(this.getPosx()+1, this.getPosy()+1));
+            res.add(new Case(this.getPosx()+1, this.getPosy()-1));
         }
         return res;
     }
@@ -37,12 +45,12 @@ public class Pion extends Piece{
     }
 
     @Override
-    public void manger() {
-
+    public Boolean manger(Piece next) {
+        return (couleur != next.getCouleurPiece());
     }
 
-    public int getCouleur() {
-        return couleur;
+    public int getCouleur(){
+        return this.getCouleurPiece();
     }
 
     @Override

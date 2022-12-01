@@ -2,14 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reine extends Piece{
-    private int couleur;
     private int posx;
     private int posy;
     private Case caseReine;
 
     public Reine(int couleur, int posx, int posy) {
-        super(new Case(posx, posy), posx, posy);
-        this.couleur = couleur;
+        super(new Case(posx, posy), posx, posy,couleur);
         this.posx = posx;
         this.posy = posy;
     }
@@ -54,11 +52,11 @@ public class Reine extends Piece{
     }
 
     @Override
-    public void manger() {
-
+    public Boolean manger(Piece next) {
+        return (couleur != next.getCouleurPiece());
     }
 
-    public int getCouleur() {
-        return couleur;
+    public int getCouleur(){
+        return this.getCouleurPiece();
     }
 }

@@ -5,17 +5,27 @@ public abstract class Piece {
     private int posy;
     protected Case position;
 
+    protected int couleur;
+
+    public int getCouleurPiece() {
+        return couleur;
+    }
+
     public Piece(Case position, int posx, int posy) {
         this.position = position;
         this.posx = posx;
         this.posy = posy;
+        this.couleur = 0;
+    }
+    public Piece(Case position, int posx, int posy, int couleur) {
+        this(position, posx, posy);
+        this.couleur = couleur;
     }
 
     abstract String getNom();
 
     abstract List<Case> mouvement();
 
-    abstract void manger();
     public Case getPosition() {
         return position;
     }
@@ -39,4 +49,6 @@ public abstract class Piece {
     public void setPosy(int posy) {
         this.posy = posy;
     }
+
+    abstract Boolean manger(Piece next);
 }

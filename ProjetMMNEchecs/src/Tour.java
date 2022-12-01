@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tour extends Piece{
-    private int couleur;
+public class Tour extends Piece {
     private int posx;
     private int posy;
 
     public Tour(int couleur, int posx, int posy) {
-        super(new Case(posx, posy), posx, posy);
-        this.couleur = couleur;
+        super(new Case(posx, posy), posx, posy, couleur);
         this.posx = posx;
         this.posy = posy;
     }
@@ -22,11 +20,11 @@ public class Tour extends Piece{
     public List<Case> mouvement() {
 
         List<Case> res = new ArrayList<>();
-        for(int i=0;i<8;i++){
-            if(i!=this.getPosx()) {
+        for (int i = 0; i < 8; i++) {
+            if (i != this.getPosx()) {
                 res.add(new Case(i, this.getPosy()));
             }
-            if(i!=this.getPosx()) {
+            if (i != this.getPosx()) {
                 res.add(new Case(this.getPosx(), i));
             }
         }
@@ -34,11 +32,13 @@ public class Tour extends Piece{
     }
 
     @Override
-    public void manger() {
+    public Boolean manger(Piece next) {
 
+        return (couleur != next.getCouleurPiece());
     }
 
-    public int getCouleur() {
-        return couleur;
+    public int getCouleur(){
+        return this.getCouleurPiece();
     }
+
 }

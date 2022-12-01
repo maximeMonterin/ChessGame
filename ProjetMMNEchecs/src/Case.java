@@ -14,7 +14,7 @@ public class Case {
     }
     @Override
     public String toString() {
-        return "Case{"+ posx +", " + posy +
+        return "{"+ posx +", " + posy +
                 '}';
     }
     @Override

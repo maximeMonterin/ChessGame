@@ -288,14 +288,15 @@ public class Echiquier extends JComponent {
             }
         }
     }
-    public void actionMouvement(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
+    public String actionMouvement(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
+        String retourInfo="";
         Case nextCase = this.getCurrentCase(positionX, positionY);
         boolean canEat = peutManger(positionX, positionY, oldMouvementCases, savePosX, savePosY);
         collisionTour_Reine(positionX, positionY, oldMouvementCases, savePosX, savePosY);
         collisionFou_Reine(positionX, positionY, oldMouvementCases, savePosX, savePosY);
 
         if (oldMouvementCases.contains(nextCase) && canEat) {
-            System.out.println("Pièce déplacée en " + nextCase.toString());
+            retourInfo = plateau.get(savePosX).get(savePosY).getNom() +" déplacé(e) en " + nextCase.toString();
             plateau.get(savePosX).get(savePosY).setPosition(nextCase);
 
             plateau.get(savePosX).get(savePosY).setPosx(positionX);
@@ -304,12 +305,16 @@ public class Echiquier extends JComponent {
             plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
             plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
         } else {
-            System.out.println("Vous ne pouvez pas vous déplacer ici");
+            retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
         }
+        return retourInfo;
     }
     public Case getCurrentCase(int positionX, int positionY){
         Case currCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
         return currCase;
+    }
+    public List<List<Piece>> getPlateau() {
+        return plateau;
     }
 }
 

@@ -105,7 +105,7 @@ public class Echiquier extends JComponent {
                     if(((Pion) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     try {
-                        iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/pion.png"));
+                        iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/pion.png"));
                     } catch (IOException e) {
                         System.out.println("err: image pion non trouvée");
                     }
@@ -117,7 +117,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/tour.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/tour.png"));
                         } catch (IOException e) {
                             System.out.println("err: image tour non trouvée");
                         }
@@ -130,7 +130,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/cheval.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/cheval.png"));
                         } catch (IOException e) {
                             System.out.println("err: image cavalier non trouvée");
                         }
@@ -144,7 +144,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/fou.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/fou.png"));
                         } catch (IOException e) {
                             System.out.println("err: image fou non trouvée");
                         }
@@ -158,7 +158,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/roi.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/roi.png"));
                         } catch (IOException e) {
                             System.out.println("err: image roi non trouvée");
                         }
@@ -172,7 +172,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconeNave = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/reine.png"));
+                            iconeNave = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/reine.png"));
                         } catch (IOException e) {
                             System.out.println("err: image reine non trouvée");
                         }
@@ -200,6 +200,7 @@ public class Echiquier extends JComponent {
     public void bouger(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
         Case nextCase = this.getCurrentCase(positionX, positionY);
         Boolean canEat = true;
+
         if(!(plateau.get(positionX).get(positionY) instanceof Vide) ){
             canEat =plateau.get(savePosX).get(savePosY).manger(plateau.get(positionX).get(positionY));
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
@@ -213,6 +214,45 @@ public class Echiquier extends JComponent {
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
+            }
+        }
+
+        if(plateau.get(savePosX).get(savePosY) instanceof Fou){
+            if(positionX<savePosX){
+                if(positionY<savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX-i).get(savePosY-i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
+                }else if(positionY>savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX-i).get(savePosY+i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
+
+                }
+            }else if (positionX>savePosX) {
+                if(positionY<savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX+i).get(savePosY-i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
+
+                }else if(positionY>savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX+i).get(savePosY+i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
+
+                }
             }
         }
 

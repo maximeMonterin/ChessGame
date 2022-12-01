@@ -297,8 +297,8 @@ public class Echiquier extends JComponent {
         collisionFou_Reine(positionX, positionY, oldMouvementCases, savePosX, savePosY);
 
         if(cptMouvement % 2 == 0){
-            this.joueur = "joueur 1";
-            if (oldMouvementCases.contains(nextCase) && canEat) {
+            this.joueur = "joueur 2";
+            if (oldMouvementCases.contains(nextCase) && canEat && (savePosX <= 7 && savePosX > 5)) {
                 ++cptMouvement;
                 System.out.println("Pièce déplacée en " + nextCase.toString()  + ", au tour du " + this.joueur);
                 plateau.get(savePosX).get(savePosY).setPosition(nextCase);
@@ -313,8 +313,8 @@ public class Echiquier extends JComponent {
             }
         }
         else {
-            this.joueur = "joueur 2";
-            if (oldMouvementCases.contains(nextCase) && canEat) {
+            this.joueur = "joueur 1";
+            if (oldMouvementCases.contains(nextCase) && canEat && (savePosX < 2)) {
                 ++cptMouvement;
                 System.out.println("Pièce déplacée en " + nextCase.toString() + ", au tour du " + this.joueur);
                 plateau.get(savePosX).get(savePosY).setPosition(nextCase);

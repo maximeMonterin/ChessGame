@@ -213,6 +213,12 @@ public class Echiquier extends JComponent {
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
+                if(!(plateau.get(savePosX-1).get(savePosY) instanceof Vide) && ((Pion) plateau.get(savePosX).get(savePosY)).getCouleur() == 1){
+                    oldMouvementCases.remove(oldMouvementCases.size()-1);
+                }
+                else if(!(plateau.get(savePosX+1).get(savePosY) instanceof Vide) && ((Pion) plateau.get(savePosX).get(savePosY)).getCouleur() == 0){
+                    oldMouvementCases.remove(oldMouvementCases.size()-1);
+                }
             }
         }
 

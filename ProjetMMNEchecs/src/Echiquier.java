@@ -214,46 +214,91 @@ public class Echiquier extends JComponent {
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
+                if(!(plateau.get(savePosX-1).get(savePosY) instanceof Vide) && ((Pion) plateau.get(savePosX).get(savePosY)).getCouleur() == 1){
+                    oldMouvementCases.remove(oldMouvementCases.size()-1);
+                }
+                else if(!(plateau.get(savePosX+1).get(savePosY) instanceof Vide) && ((Pion) plateau.get(savePosX).get(savePosY)).getCouleur() == 0){
+                    oldMouvementCases.remove(oldMouvementCases.size()-1);
+                }
             }
         }
-
-        if(plateau.get(savePosX).get(savePosY) instanceof Fou){
-            if(positionX<savePosX){
-                if(positionY<savePosY){
-                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                        if(!(plateau.get(savePosX-i).get(savePosY-i) instanceof Vide)){
-                            oldMouvementCases.remove(new Case(positionX, positionY));
+        
+       if(plateau.get(savePosX).get(savePosY) instanceof Tour || plateau.get(savePosX).get(savePosY) instanceof Reine){
+            if(positionX == savePosX){
+                if(savePosY-positionY > 0) {
+                    for (int i = 1; i < Math.abs(savePosY - positionY); ++i) {
+                        if (!(plateau.get(savePosX).get(savePosY-i) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
-                }else if(positionY>savePosY){
-                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                        if(!(plateau.get(savePosX-i).get(savePosY+i) instanceof Vide)){
-                            oldMouvementCases.remove(new Case(positionX, positionY));
+                }else if (savePosY-positionY < 0){
+                    for (int i = 1; i < Math.abs(savePosY - positionY); ++i) {
+                        if (!(plateau.get(savePosX).get(savePosY+i) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
-
                 }
-            }else if (positionX>savePosX) {
-                if(positionY<savePosY){
-                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                        if(!(plateau.get(savePosX+i).get(savePosY-i) instanceof Vide)){
-                            oldMouvementCases.remove(new Case(positionX, positionY));
+
+            }
+            else if(positionY == savePosY){
+                if(savePosX-positionX > 0) {
+                    for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                        if (!(plateau.get(savePosX - i).get(positionY) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
-
-                }else if(positionY>savePosY){
-                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                        if(!(plateau.get(savePosX+i).get(savePosY+i) instanceof Vide)){
-                            oldMouvementCases.remove(new Case(positionX, positionY));
+                }else if (savePosX-positionX < 0){
+                    for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                        if (!(plateau.get(savePosX + i).get(positionY) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
-
                 }
             }
+
+        }
+
+       if(plateau.get(savePosX).get(savePosY) instanceof Fou || plateau.get(savePosX).get(savePosY) instanceof Reine){
+           if(positionX<savePosX){
+               if(positionY<savePosY){
+                   for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                       if(!(plateau.get(savePosX-i).get(savePosY-i) instanceof Vide)){
+                           oldMouvementCases.remove(new Case(positionX, positionY));
+                           break;
+                       }
+                   }
+               }else if(positionY>savePosY){
+                   for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                       if(!(plateau.get(savePosX-i).get(savePosY+i) instanceof Vide)){
+                           oldMouvementCases.remove(new Case(positionX, positionY));
+                           break;
+                       }
+                   }
+
+               }
+           }else if (positionX>savePosX) {
+               if (positionY < savePosY) {
+                   for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                       if (!(plateau.get(savePosX + i).get(savePosY - i) instanceof Vide)) {
+                           oldMouvementCases.remove(new Case(positionX, positionY));
+                           break;
+                       }
+                   }
+
+               } else if (positionY > savePosY) {
+                   for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                       if (!(plateau.get(savePosX + i).get(savePosY + i) instanceof Vide)) {
+                           oldMouvementCases.remove(new Case(positionX, positionY));
+                           break;
+                       }
+                   }
+
+               }
+           }
         }
 
             if (oldMouvementCases.contains(nextCase) && canEat) {

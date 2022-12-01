@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
 public class Fou extends Piece {
     public Fou(int couleur,int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);

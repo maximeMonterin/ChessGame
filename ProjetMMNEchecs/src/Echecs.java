@@ -1,21 +1,25 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
-
-public class Affichage extends JFrame implements ActionListener, MouseListener {
-    private  Echiquier plateau;
+public class Echecs extends JFrame implements ActionListener, MouseListener {
+    private Echiquier plateau;
     private List<Case> oldMouvementCases;
     private Case currCase;
+    private JLabel titre;
     private int cpt = 0;
     private int savePosX;
     private int savePosY;
-    public Affichage(){
+    public Echecs(){
         plateau= new Echiquier();
         plateau.setBounds(0,0,910,910);
+        titre = new JLabel("Echecs");
+        titre.setBounds(100,10, 200, 30);
+        titre.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+        this.add(titre);
         this.add(plateau);
         this.setTitle("Echecs");
         this.setSize(1000,1000);

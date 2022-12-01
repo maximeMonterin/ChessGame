@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
 public class Cavalier extends Piece{
     public Cavalier(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);

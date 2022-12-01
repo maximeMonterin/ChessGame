@@ -1,5 +1,4 @@
 import java.util.Objects;
-
 public class Case {
     private final int posx;
     private final int posy;

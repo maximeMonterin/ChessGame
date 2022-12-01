@@ -7,20 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Affichage extends JFrame implements ActionListener, MouseListener {
-
-    private JPanel panelMain;
     private  Echiquier plateau;
     private List<Case> oldMouvementCases;
     private Case currCase;
-
     private int cpt = 0;
     private int savePosX;
     private int savePosY;
-
     public Affichage(){
         plateau= new Echiquier();
         plateau.setBounds(0,0,910,910);
-        panelMain= new JPanel();
         this.add(plateau);
         this.setTitle("Echecs");
         this.setSize(1000,1000);
@@ -28,12 +23,8 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
         this.setLayout(null);
         this.addMouseListener(this);
     }
-
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
+    public void actionPerformed(ActionEvent e) {}
     @Override
     public void mouseClicked(MouseEvent e) {
         ++cpt;
@@ -47,7 +38,7 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
                 savePosY = positionY/100;
                 oldMouvementCases = plateau.getListeCase(savePosX, savePosY);
             } else {
-                plateau.bouger(positionX/100, positionY/100, oldMouvementCases, savePosX, savePosY);
+                plateau.actionMouvement(positionX/100, positionY/100, oldMouvementCases, savePosX, savePosY);
                 if(!oldMouvementCases.isEmpty()){
                     oldMouvementCases.clear();
                 }
@@ -58,24 +49,12 @@ public class Affichage extends JFrame implements ActionListener, MouseListener {
 
         plateau.repaint();
     }
-
     @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
+    public void mousePressed(MouseEvent e) {}
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
+    public void mouseReleased(MouseEvent e) {}
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
+    public void mouseEntered(MouseEvent e) {}
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 }

@@ -2,24 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reine extends Piece{
-    private int posx;
-    private int posy;
-    private Case caseReine;
-
     public Reine(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy,couleur);
-        this.posx = posx;
-        this.posy = posy;
     }
-
+    public int getCouleur(){
+        return this.getCouleurPiece();
+    }
     @Override
     String getNom() {
         return "Reine";
     }
-
     @Override
     public List<Case> mouvement() {
-
         List<Case> res = new ArrayList<>();
         for(int i=0;i<8;i++){
             if(i!=this.getPosx()){
@@ -50,13 +44,8 @@ public class Reine extends Piece{
         }
         return res;
     }
-
     @Override
     public Boolean manger(Piece next) {
         return (couleur != next.getCouleurPiece());
-    }
-
-    public int getCouleur(){
-        return this.getCouleurPiece();
     }
 }

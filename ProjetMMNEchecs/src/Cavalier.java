@@ -2,20 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cavalier extends Piece{
-    private int posx;
-    private int posy;
-
     public Cavalier(int couleur, int posx, int posy) {
-        super(new Case(posx, posy), posx, posy,couleur);
-        this.posx = posx;
-        this.posy = posy;
+        super(new Case(posx, posy), posx, posy, couleur);
     }
-
+    public int getCouleur(){
+        return this.getCouleurPiece();
+    }
     @Override
     String getNom() {
         return "Cavalier";
     }
-
     @Override
     public List<Case> mouvement() {
 
@@ -58,14 +54,8 @@ public class Cavalier extends Piece{
         }
         return res;
     }
-
     @Override
     public Boolean manger(Piece next) {
         return (couleur != next.getCouleurPiece());
     }
-
-    public int getCouleur(){
-        return this.getCouleurPiece();
-    }
-
 }

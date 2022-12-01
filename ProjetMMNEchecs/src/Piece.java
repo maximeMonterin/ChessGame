@@ -4,7 +4,6 @@ public abstract class Piece {
     private int posx;
     private int posy;
     protected Case position;
-
     protected int couleur;
 
     public int getCouleurPiece() {

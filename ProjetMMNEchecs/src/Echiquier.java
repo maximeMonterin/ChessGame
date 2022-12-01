@@ -69,36 +69,8 @@ public class Echiquier extends JComponent {
             }
         }
     }
-    public void paintComponent(Graphics g){
-        Graphics2D plateauReel= (Graphics2D) g;
-
-        int tailleCase = 100;
-        boolean couleur=true;
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if (couleur) {
-                    plateauReel.setPaint(Color.WHITE);
-                } else {
-                    plateauReel.setPaint(Color.BLACK);
-                }
-                plateauReel.fill(new Rectangle2D.Double((j+1)*tailleCase, (i+0.5)*tailleCase,tailleCase,tailleCase));
-                couleur=!couleur;
-            }
-            couleur=!couleur;
-        }
-
-        for(int i=1;i<9;i++){
-            plateauReel.setPaint(Color.BLACK);
-            plateauReel.drawString("" + i,tailleCase/2, (int) (tailleCase*(9-i)));
-        }
-
-        for(int j=0;j<8;j++){
-            plateauReel.setPaint(Color.BLACK);
-            plateauReel.drawString(String.valueOf((char)('A'+ j)), (int) (tailleCase*(j+1.45)), (int) (tailleCase * 9));
-        }
-
+    public void setImagePiece(Graphics2D plateauReel, int tailleCase){
         String couleurPiece = "";
-
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(plateau.get(i).get(j) instanceof Pion){
@@ -181,26 +153,43 @@ public class Echiquier extends JComponent {
                 }
             }
         }
+    }
+    public void paintComponent(Graphics g){
+        Graphics2D plateauReel= (Graphics2D) g;
+
+        int tailleCase = 100;
+        boolean couleur=true;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if (couleur) {
+                    plateauReel.setPaint(Color.WHITE);
+                } else {
+                    plateauReel.setPaint(Color.BLACK);
+                }
+                plateauReel.fill(new Rectangle2D.Double((j+1)*tailleCase, (i+0.5)*tailleCase,tailleCase,tailleCase));
+                couleur=!couleur;
+            }
+            couleur=!couleur;
+        }
+
+        for(int i=1;i<9;i++){
+            plateauReel.setPaint(Color.BLACK);
+            plateauReel.drawString("" + i,tailleCase/2, (tailleCase*(9-i)));
+        }
+
+        for(int j=0;j<8;j++){
+            plateauReel.setPaint(Color.BLACK);
+            plateauReel.drawString(String.valueOf((char)('A'+ j)), (int) (tailleCase*(j+1.45)),(tailleCase * 9));
+        }
+
+        setImagePiece(plateauReel, tailleCase);
         plateauReel.dispose();
     }
-
     public List<Case> getListeCase(int positionX, int positionY){
        return (plateau.get(positionX).get(positionY)).mouvement();
     }
-    public List<String> listeCaseToString(List<Case> c){
-        List<String> cases= new ArrayList<>();
-        Iterator<Case> it= c.iterator();
-        while(it.hasNext()){
-            Case current= it.next();
-            cases.add(current.toString());
-        }
-        return cases;
-    }
-
-    public void bouger(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
-        Case nextCase = this.getCurrentCase(positionX, positionY);
+    public boolean peutManger(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
         Boolean canEat = true;
-
         if(!(plateau.get(positionX).get(positionY) instanceof Vide) ){
             canEat =plateau.get(savePosX).get(savePosY).manger(plateau.get(positionX).get(positionY));
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
@@ -209,7 +198,6 @@ public class Echiquier extends JComponent {
                     oldMouvementCases.remove(0);
                 }
             }
-
         }else{
             if(plateau.get(savePosX).get(savePosY) instanceof Pion){
                 oldMouvementCases.remove(oldMouvementCases.size()-1);
@@ -222,8 +210,10 @@ public class Echiquier extends JComponent {
                 }
             }
         }
-        
-       if(plateau.get(savePosX).get(savePosY) instanceof Tour || plateau.get(savePosX).get(savePosY) instanceof Reine){
+        return canEat;
+    }
+    public void collisionTour_Reine(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
+        if(plateau.get(savePosX).get(savePosY) instanceof Tour || plateau.get(savePosX).get(savePosY) instanceof Reine){
             if(positionX == savePosX){
                 if(savePosY-positionY > 0) {
                     for (int i = 1; i < Math.abs(savePosY - positionY); ++i) {
@@ -240,7 +230,6 @@ public class Echiquier extends JComponent {
                         }
                     }
                 }
-
             }
             else if(positionY == savePosY){
                 if(savePosX-positionX > 0) {
@@ -259,64 +248,69 @@ public class Echiquier extends JComponent {
                     }
                 }
             }
-
         }
+    }
+    public void collisionFou_Reine(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
+        if(plateau.get(savePosX).get(savePosY) instanceof Fou || plateau.get(savePosX).get(savePosY) instanceof Reine){
+            if(positionX<savePosX){
+                if(positionY<savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX-i).get(savePosY-i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
+                }else if(positionY>savePosY){
+                    for(int i=1;i<Math.abs(savePosX-positionX);++i){
+                        if(!(plateau.get(savePosX-i).get(savePosY+i) instanceof Vide)){
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
 
-       if(plateau.get(savePosX).get(savePosY) instanceof Fou || plateau.get(savePosX).get(savePosY) instanceof Reine){
-           if(positionX<savePosX){
-               if(positionY<savePosY){
-                   for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                       if(!(plateau.get(savePosX-i).get(savePosY-i) instanceof Vide)){
-                           oldMouvementCases.remove(new Case(positionX, positionY));
-                           break;
-                       }
-                   }
-               }else if(positionY>savePosY){
-                   for(int i=1;i<Math.abs(savePosX-positionX);++i){
-                       if(!(plateau.get(savePosX-i).get(savePosY+i) instanceof Vide)){
-                           oldMouvementCases.remove(new Case(positionX, positionY));
-                           break;
-                       }
-                   }
+                }
+            }else if (positionX>savePosX) {
+                if (positionY < savePosY) {
+                    for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                        if (!(plateau.get(savePosX + i).get(savePosY - i) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
 
-               }
-           }else if (positionX>savePosX) {
-               if (positionY < savePosY) {
-                   for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
-                       if (!(plateau.get(savePosX + i).get(savePosY - i) instanceof Vide)) {
-                           oldMouvementCases.remove(new Case(positionX, positionY));
-                           break;
-                       }
-                   }
+                } else if (positionY > savePosY) {
+                    for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
+                        if (!(plateau.get(savePosX + i).get(savePosY + i) instanceof Vide)) {
+                            oldMouvementCases.remove(new Case(positionX, positionY));
+                            break;
+                        }
+                    }
 
-               } else if (positionY > savePosY) {
-                   for (int i = 1; i < Math.abs(savePosX - positionX); ++i) {
-                       if (!(plateau.get(savePosX + i).get(savePosY + i) instanceof Vide)) {
-                           oldMouvementCases.remove(new Case(positionX, positionY));
-                           break;
-                       }
-                   }
-
-               }
-           }
-        }
-
-            if (oldMouvementCases.contains(nextCase) && canEat) {
-                System.out.println("Pièce déplacée en " + nextCase.toString());
-                plateau.get(savePosX).get(savePosY).setPosition(nextCase);
-
-                plateau.get(savePosX).get(savePosY).setPosx(positionX);
-                plateau.get(savePosX).get(savePosY).setPosy(positionY);
-
-                plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
-                plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
-            } else {
-                System.out.println("Vous ne pouvez pas vous déplacer ici");
+                }
             }
+        }
+    }
+    public void actionMouvement(int positionX, int positionY, List<Case> oldMouvementCases, int savePosX, int savePosY){
+        Case nextCase = this.getCurrentCase(positionX, positionY);
+        boolean canEat = peutManger(positionX, positionY, oldMouvementCases, savePosX, savePosY);
+        collisionTour_Reine(positionX, positionY, oldMouvementCases, savePosX, savePosY);
+        collisionFou_Reine(positionX, positionY, oldMouvementCases, savePosX, savePosY);
+
+        if (oldMouvementCases.contains(nextCase) && canEat) {
+            System.out.println("Pièce déplacée en " + nextCase.toString());
+            plateau.get(savePosX).get(savePosY).setPosition(nextCase);
+
+            plateau.get(savePosX).get(savePosY).setPosx(positionX);
+            plateau.get(savePosX).get(savePosY).setPosy(positionY);
+
+            plateau.get(positionX).set(positionY, plateau.get(savePosX).get(savePosY));
+            plateau.get(savePosX).set(savePosY, new Vide(savePosX, savePosY));
+        } else {
+            System.out.println("Vous ne pouvez pas vous déplacer ici");
+        }
     }
     public Case getCurrentCase(int positionX, int positionY){
         Case currCase = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
-
         return currCase;
     }
 }

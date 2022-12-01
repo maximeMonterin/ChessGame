@@ -2,22 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pion extends Piece{
-
-    private int posx;
-
-    private int posy;
-
     public Pion(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy,couleur);
-        this.posx = posx;
-        this.posy = posy;
     }
-
+    public int getCouleur(){
+        return this.getCouleurPiece();
+    }
     @Override
     String getNom() {
         return "Pion";
     }
-
     @Override
     public List<Case> mouvement(){
         List<Case> res = new ArrayList<>();
@@ -39,24 +33,9 @@ public class Pion extends Piece{
         }
         return res;
     }
-
-    public void bouger(){
-
-    }
-
     @Override
     public Boolean manger(Piece next) {
         return (couleur != next.getCouleurPiece());
     }
 
-    public int getCouleur(){
-        return this.getCouleurPiece();
-    }
-
-    @Override
-    public String toString() {
-        return "Pion{" +
-                "position=" + position +
-                '}';
-    }
 }

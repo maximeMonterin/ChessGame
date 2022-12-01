@@ -2,20 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Roi extends Piece {
-    private int posx;
-    private int posy;
-
     public Roi(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
-        this.posx = posx;
-        this.posy = posy;
     }
-
+    public int getCouleur(){
+        return this.getCouleurPiece();
+    }
     @Override
     String getNom() {
         return "Roi";
     }
-
     @Override
     public List<Case> mouvement() {
 
@@ -51,15 +47,9 @@ public class Roi extends Piece {
 
         return res;
     }
-
     @Override
     public Boolean manger(Piece next) {
 
         return (couleur != next.getCouleurPiece());
     }
-
-    public int getCouleur(){
-        return this.getCouleurPiece();
-    }
-
 }

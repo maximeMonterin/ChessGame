@@ -2,7 +2,7 @@
  * Main de du Jeu D'echecs
  */
 public class Main {
-    
+
     /***
      * Constructeur de Main
      * Instancie un jeu d'echecs et son affichage

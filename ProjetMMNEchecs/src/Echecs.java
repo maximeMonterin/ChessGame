@@ -73,7 +73,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         int positionY= (e.getX()-100);
         if(positionX>=0 && positionY>=0 && positionX<=800 && positionY<=800){
             if(compteurDeplacement % 2 != 0){
-                caseActuelle = plateauDeJeu.getCurrentCase(positionX/100,positionY/100);
+                caseActuelle = plateauDeJeu.getCaseActuelle(positionX/100,positionY/100);
                 info.setText("Vous avez selectionné la piece '"+ plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100).getNom()+"' en "+ caseActuelle.toString());
                 positionActuelleX = positionX/100;
                 positionActuelleY = positionY/100;

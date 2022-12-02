@@ -7,16 +7,29 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+/***
+ * Classe Echiquier heritant de Jcomponent
+ * Defini un echiquier de jeu avec son affichage
+ */
 public class Echiquier extends JComponent {
     private List<List<Piece>> plateau;
     private BufferedImage iconePiece;
     private int cptMouvement = 0;
     private String joueur = "";
 
+    /***
+     * Getter du nom du joueur qui joue
+     * @return String
+     */
     public String getJoueur() {
         return joueur;
     }
 
+    /***
+     * Constructeur de Echiquier
+     * Initialise le plateau virtuellement et le placement des différentes Pieces dans celui-ci
+     */
     public Echiquier() {
         plateau = new ArrayList<>();
         for(int i=0;i<8;i++){
@@ -31,38 +44,66 @@ public class Echiquier extends JComponent {
         setReines();
         setRois();
     }
+
+    /***
+     * Initialise les pions virtuellement dans le plateau
+     */
     public void setPions(){
         for(int i=0;i<8;i++){
             plateau.get(1).set(i,new Pion(0,1, i ));
             plateau.get(6).set(i,new Pion(1,6, i));
         }
     }
+
+    /***
+     * Initialise les tours virtuellement dans le plateau
+     */
     public void setTours(){
         plateau.get(0).set(0,new Tour(0, 0, 0));
         plateau.get(0).set(7,new Tour(0, 0, 7));
         plateau.get(7).set(0,new Tour(1, 7, 0));
         plateau.get(7).set(7,new Tour(1, 7, 7));
     }
+
+    /***
+     * Initialise les cavaliers virtuellement dans le plateau
+     */
     public void setCavaliers(){
         plateau.get(0).set(1,new Cavalier(0, 0, 1));
         plateau.get(0).set(6,new Cavalier(0, 0, 6));
         plateau.get(7).set(1,new Cavalier(1, 7, 1));
         plateau.get(7).set(6,new Cavalier(1, 7, 6));
     }
+
+    /***
+     * Initialise les fous virtuellement dans le plateau
+     */
     public void setFous(){
         plateau.get(0).set(2,new Fou(0, 0, 2));
         plateau.get(0).set(5,new Fou(0, 0, 5));
         plateau.get(7).set(2,new Fou(1, 7, 2));
         plateau.get(7).set(5,new Fou(1, 7, 5));
     }
+
+    /***
+     * Initialise les rois virtuellement dans le plateau
+     */
     public void setRois(){
         plateau.get(0).set(4,new Roi(0,0, 4));
         plateau.get(7).set(4,new Roi(1,7, 4));
     }
+
+    /***
+     * Initialise les reines virtuellement dans le plateau
+     */
     public void setReines(){
         plateau.get(0).set(3,new Reine(0,0, 3));
         plateau.get(7).set(3,new Reine(1,7, 3));
     }
+
+    /***
+     * Initialise les cases vides virtuellement dans le plateau
+     */
     public void setVides(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -74,6 +115,12 @@ public class Echiquier extends JComponent {
             }
         }
     }
+
+    /***
+     * Permet l'affichage des images des pions sur l'echiquier
+     * @param plateauReel le plateau réel (celui affiché)
+     * @param tailleCase la taille d'une case du plateau
+     */
     public void setImagePiece(Graphics2D plateauReel, int tailleCase){
         String couleurPiece = "";
         for(int i=0;i<8;i++){
@@ -159,6 +206,11 @@ public class Echiquier extends JComponent {
             }
         }
     }
+
+    /***
+     * Permet l'affichage de l'échiquier et comment l'afficher
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics g){
         Graphics2D plateauReel= (Graphics2D) g;
 
@@ -190,9 +242,26 @@ public class Echiquier extends JComponent {
         setImagePiece(plateauReel, tailleCase);
         plateauReel.dispose();
     }
+
+    /***
+     * Récupere la liste des cases où la piece en positionX et positionY peut aller au prochain coup
+     * @param positionX position en x de la piece
+     * @param positionY position en y de la piece
+     * @return List<Case>
+     */
     public List<Case> getListeCase(int positionX, int positionY){
        return (plateau.get(positionX).get(positionY)).mouvement();
     }
+
+    /***
+     * Verifie si l'endroit où l'on veut aller est vide ou pas et si oui vérifie que les mouvements que la piece peut faire lui permette bien de manger
+     * @param positionX position en x de où on veut aller avec la piece
+     * @param positionY position en y de où on veut aller avec la piece
+     * @param mouvementCasesPossibles liste des cases où la piece en positionActuelleX et positionActuelleY peut aller au prochain coup
+     * @param positionActuelleX position en x actuelle de la piece
+     * @param positionActuelleY position en y actuelle de la piece
+     * @return boolean (true si la piece peut manger sinon false)
+     */
     public boolean Manger(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         Boolean peutManger = true;
         if(!(plateau.get(positionX).get(positionY) instanceof Vide) ){
@@ -217,6 +286,15 @@ public class Echiquier extends JComponent {
         }
         return peutManger;
     }
+
+    /***
+     * Si la piece est une tour ou une reine, octroie ou non les mouvements réels que la piece peut faire horizontalement et verticalement
+     * @param positionX position en x de où on veut aller avec la piece
+     * @param positionY position en y de où on veut aller avec la piece
+     * @param mouvementCasesPossibles liste des cases où la piece en positionActuelleX et positionActuelleY peut aller au prochain coup
+     * @param positionActuelleX position en x actuelle de la piece
+     * @param positionActuelleY position en y actuelle de la piece
+     */
     public void collisionTour_Reine(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         if(plateau.get(positionActuelleX).get(positionActuelleY) instanceof Tour || plateau.get(positionActuelleX).get(positionActuelleY) instanceof Reine){
             if(positionX == positionActuelleX){
@@ -255,6 +333,15 @@ public class Echiquier extends JComponent {
             }
         }
     }
+
+    /***
+     * Si la piece est un fou ou une reine, octroie ou non les mouvements réels que la piece peut faire diagonalement
+     * @param positionX position en x de où on veut aller avec la piece
+     * @param positionY position en y de où on veut aller avec la piece
+     * @param mouvementCasesPossibles liste des cases où la piece en positionActuelleX et positionActuelleY peut aller au prochain coup
+     * @param positionActuelleX position en x actuelle de la piece
+     * @param positionActuelleY position en y actuelle de la piece
+     */
     public void collisionFou_Reine(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         if(plateau.get(positionActuelleX).get(positionActuelleY) instanceof Fou || plateau.get(positionActuelleX).get(positionActuelleY) instanceof Reine){
             if(positionX<positionActuelleX){
@@ -295,9 +382,19 @@ public class Echiquier extends JComponent {
             }
         }
     }
+
+    /***
+     * Effectue les mouvements de la piece en fonction de ce que l'utilisateur fait si c'est possible ou non
+     * @param positionX position en x de où on veut aller avec la piece
+     * @param positionY position en y de où on veut aller avec la piece
+     * @param mouvementCasesPossibles liste des cases où la piece en positionActuelleX et positionActuelleY peut aller au prochain coup
+     * @param positionActuelleX position en x actuelle de la piece
+     * @param positionActuelleY position en y actuelle de la piece
+     * @return String renvoie les actions de jeux
+     */
     public String actionMouvement(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         String retourInfo="";
-        Case prochaineCase = this.getCurrentCase(positionX, positionY);
+        Case prochaineCase = this.getCaseActuelle(positionX, positionY);
         boolean peutManger = Manger(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
         collisionTour_Reine(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
         collisionFou_Reine(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
@@ -339,34 +436,23 @@ public class Echiquier extends JComponent {
         }
         return retourInfo;
     }
-    public Case getCurrentCase(int positionX, int positionY){
+
+    /***
+     * recupère la case actuelle sur le plateau en fonction des positions x et y
+     * @param positionX position en x de où on veut aller avec la piece
+     * @param positionY position en y de où on veut aller avec la piece
+     * @return Case
+     */
+    public Case getCaseActuelle(int positionX, int positionY){
         Case caseActuelle = new Case(plateau.get(positionX).get(positionY).getPosition().getPosx(), plateau.get(positionX).get(positionY).getPosition().getPosy());
         return caseActuelle;
     }
+
+    /***
+     * Getter pour récuperer le plateau de jeu
+     * @return List<List<Piece>>
+     */
     public List<List<Piece>> getPlateau() {
         return plateau;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -31,9 +31,7 @@ public class Vide extends Piece {
      */
     @Override
     public List<Case> mouvement() {
-        List<Case> res = new ArrayList<>();
-        res.add(new Case(this.getPosx(), this.getPosy()));
-        return res;
+        return null;
     }
 
     /***
@@ -43,6 +41,6 @@ public class Vide extends Piece {
      */
     @Override
     public Boolean manger(Piece p) {
-        return true;
+        return null;
     }
 }

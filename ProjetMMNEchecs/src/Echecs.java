@@ -19,6 +19,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
+    private String tourJoueur= "Noirs";
 
     /***
      * Contructeur de Echecs
@@ -79,14 +80,19 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                 positionActuelleY = positionY/100;
                 nextMouvementCases = plateauDeJeu.getListeCase(positionActuelleX, positionActuelleY);
             } else {
-                if(!nextMouvementCases.isEmpty()){
-                    info.setText(plateauDeJeu.actionMouvement(positionX/100, positionY/100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                    if(!plateauDeJeu.getJoueur().equals("")){
-                        joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
-                    }else{
-                        info.setText("Ce n'est pas votre tour !");
+                try{
+                    if(!nextMouvementCases.isEmpty()){
+                        info.setText(plateauDeJeu.actionMouvement(positionX/100, positionY/100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                        if(!plateauDeJeu.getJoueur().equals(tourJoueur)){
+                            tourJoueur=plateauDeJeu.getJoueur();
+                            joueur.setText("Au tour des " + tourJoueur);
+                        }else{
+                            info.setText("Ce n'est pas votre tour !");
+                        }
+                        nextMouvementCases.clear();
                     }
-                    nextMouvementCases.clear();
+                }catch(Exception exe){
+                    System.out.println("La case Vide ne fait rien");
                 }
             }
         }else{

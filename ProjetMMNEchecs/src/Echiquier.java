@@ -413,7 +413,6 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                this.joueur="";
                 retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
             }
         }
@@ -430,7 +429,6 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                this.joueur="";
                 System.out.println("Vous ne pouvez pas vous déplacer ici");
             }
         }

@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 /***
  * Classe Tour héritant de Piece
  * Definie la Piece comme une Tour sur un échiquier
  */
 public class Tour extends Piece {
+
     /***
      * Constructeur de Tour
      * @param couleur couleur de la tour (0=Blanc; 1=Noir)
@@ -14,6 +16,7 @@ public class Tour extends Piece {
     public Tour(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
     }
+
     /***
      * Getter pour recupérer la couleur de la Tour
      * @return int
@@ -21,6 +24,7 @@ public class Tour extends Piece {
     public int getCouleur(){
         return this.getCouleurPiece();
     }
+
     /***
      * Getter pour récuperer le Nom de la Piece
      * @return String
@@ -29,11 +33,11 @@ public class Tour extends Piece {
     String getNom() {
         return "Tour";
     }
+
     /***
      * Mouvements correspondant aux cases où pourra aller la Tour au prochain coup
      * @return List<Case>
      */
-
     @Override
     public List<Case> mouvement() {
 
@@ -48,6 +52,7 @@ public class Tour extends Piece {
         }
         return res;
     }
+
     /***
      * permet de définir si la piece que l'on souhaite manger est bien de la couleur opposée
      * @param p piece que l'on veut manger

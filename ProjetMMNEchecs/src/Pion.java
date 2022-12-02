@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 /***
  * Classe Pion héritant de Piece
  * Definie la Piece comme un Pion sur un échiquier
  */
 public class Pion extends Piece{
+
     /***
      * Constructeur de Pion
      * @param couleur couleur du pion (0=Blanc; 1=Noir)
@@ -14,6 +16,7 @@ public class Pion extends Piece{
     public Pion(int couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy,couleur);
     }
+
     /***
      * Getter pour recupérer la couleur du Pion
      * @return int
@@ -21,6 +24,7 @@ public class Pion extends Piece{
     public int getCouleur(){
         return this.getCouleurPiece();
     }
+
     /***
      * Getter pour récuperer le Nom de la Piece
      * @return String
@@ -29,6 +33,7 @@ public class Pion extends Piece{
     String getNom() {
         return "Pion";
     }
+
     /***
      * Mouvements correspondant aux cases où pourra aller le pion au prochain coup
      * @return List<Case>
@@ -54,6 +59,7 @@ public class Pion extends Piece{
         }
         return res;
     }
+
     /***
      * permet de définir si la piece que l'on souhaite manger est bien de la couleur opposée
      * @param p piece que l'on veut manger

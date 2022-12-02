@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+
 /***
  * Classe Vide héritant de Piece
  * Definie la Piece comme un Vide sur un échiquier
  */
 public class Vide extends Piece {
+
     /***
      * Concstructeur de Vide
      * @param posx position x sur l'échiquier
@@ -13,6 +15,7 @@ public class Vide extends Piece {
     public Vide(int posx, int posy) {
         super(new Case(posx, posy), posx, posy);
     }
+
     /***
      * Getter pour récuperer le Nom de la Piece
      * @return String
@@ -21,6 +24,7 @@ public class Vide extends Piece {
     String getNom() {
         return "Vide";
     }
+
     /***
      * Mouvements de Vide (Aucuns déplacements)
      * @return List<Case>
@@ -31,6 +35,7 @@ public class Vide extends Piece {
         res.add(new Case(this.getPosx(), this.getPosy()));
         return res;
     }
+
     /***
      * manger pour vide n'a pas d'effet
      * @param p piece que l'on veut manger

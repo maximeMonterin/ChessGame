@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+/***
+ * Classe Echecs
+ * Defini le jeu des Échecs avec une interface Graphique associée
+ */
 public class Echecs extends JFrame implements ActionListener, MouseListener {
     private Echiquier plateauDeJeu;
     private List<Case> nextMouvementCases;
@@ -15,6 +19,13 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
+
+    /***
+     * Contructeur de Echecs
+     * Defini la taille de la fenetre de l'interface
+     * Defini le plateauDeJeu de la Classe Echiquier sur lequel on va jouer
+     * Defini les différents attribut composants la fenetre
+     */
     public Echecs(){
         plateauDeJeu = new Echiquier();
         plateauDeJeu.setBounds(0,0,910,910);
@@ -43,8 +54,18 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         joueur.addMouseListener(this);
         info.addMouseListener(this);
     }
+
+    /***
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {}
+
+    /***
+     * Permet de déplacer les differentes piece du plateauDeJeu grâce aux clics de la souris
+     * Modifie l'affichage en fonction des actions effectuées
+     * @param e the event to be processed
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         ++compteurDeplacement;
@@ -73,12 +94,28 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         }
         plateauDeJeu.repaint();
     }
+
+    /***
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {}
+
+    /***
+     * @param e the event to be processed
+     */
     @Override
     public void mouseReleased(MouseEvent e) {}
+
+    /***
+     * @param e the event to be processed
+     */
     @Override
     public void mouseEntered(MouseEvent e) {}
+
+    /***
+     * @param e the event to be processed
+     */
     @Override
     public void mouseExited(MouseEvent e) {}
 }

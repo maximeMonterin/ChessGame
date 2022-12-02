@@ -6,6 +6,7 @@ import java.util.List;
  * Definie la Piece comme un Cavalier sur un échiquier
  */
 public class Cavalier extends Piece{
+
     /***
      * Constructeur de Cavalier
      * @param couleur couleur du cavalier (0=Blanc; 1=Noir)

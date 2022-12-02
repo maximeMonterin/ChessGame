@@ -34,7 +34,7 @@ public class Cavalier extends Piece{
     }
 
     /***
-     * Mouvements correspondant aux cases où pourra aller le cavalier au prochain coup
+     * Mouvements correspondant aux cases où pourra aller le Cavalier au prochain coup
      * @return List<Case>
      */
     @Override

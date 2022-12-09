@@ -1,7 +1,5 @@
 **JEU D'ECHECS**\
-``` 
-PAR DELESVAUX PINEL-GUINARD MONTERIN
-```
+```PAR DELESVAUX PINEL-GUINARD MONTERIN```
 ==========================================
 
 >\> Comment télécharger le jeu ?\

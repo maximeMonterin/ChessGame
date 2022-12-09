@@ -1,5 +1,4 @@
 **CHESS GAME**
-
 ==============
 
 # ``` __BY DELESVAUX PINEL-GUINARD MONTERIN__```

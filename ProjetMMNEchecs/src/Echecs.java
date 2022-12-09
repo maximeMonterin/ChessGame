@@ -16,6 +16,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private JLabel titre;
     private JLabel joueur;
     private JLabel info;
+    public static JLabel timer = new JLabel(Main.time);
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
@@ -43,9 +44,13 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         info.setBounds(350,920, 500, 20);
         info.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
+        timer.setBounds(300,10, 500, 30);
+        timer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+
         this.add(info);
         this.add(joueur);
         this.add(titre);
+        this.add(timer);
         this.add(plateauDeJeu);
         this.setTitle("Echecs");
         this.setSize(1000,1000);

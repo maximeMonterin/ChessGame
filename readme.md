@@ -3,7 +3,7 @@
  =
 
 ```
-<center>l=-=> Comment télécharger le jeu ? <=-=l</center>
+                                              =-=> Comment télécharger le jeu ? <=-=
 ```
 
 > __➀ Ouvrez un terminal dans le dossier où vous souahitez le jeu, puis executez la commande suivante:__\

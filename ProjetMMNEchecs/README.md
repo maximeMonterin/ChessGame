@@ -1,3 +1,4 @@
 # **CHESS GAME**
 > __BY DELESVAUX PINEL-GUINARD MONTERIN__
->test
+
+``` > How to play``` 

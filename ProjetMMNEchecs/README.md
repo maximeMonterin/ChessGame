@@ -1,4 +1,4 @@
-**JEU D'ECHECS**\
+**JEU D'ECHECS**
 ```PAR DELESVAUX PINEL-GUINARD MONTERIN```
 ==========================================
 

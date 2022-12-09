@@ -129,7 +129,7 @@ public class Echiquier extends JComponent {
                     if(((Pion) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     try {
-                        iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/pion.png"));
+                        iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/pion.png"));
                     } catch (IOException e) {
                         System.out.println("err: image pion non trouvée");
                     }
@@ -141,7 +141,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/tour.png"));
+                            iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/tour.png"));
                         } catch (IOException e) {
                             System.out.println("err: image tour non trouvée");
                         }
@@ -154,7 +154,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/cheval.png"));
+                            iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/cheval.png"));
                         } catch (IOException e) {
                             System.out.println("err: image cavalier non trouvée");
                         }
@@ -168,7 +168,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/" + couleurPiece + "/fou.png"));
+                            iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/fou.png"));
                         } catch (IOException e) {
                             System.out.println("err: image fou non trouvée");
                         }
@@ -182,7 +182,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/roi.png"));
+                            iconePiece = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/roi.png"));
                         } catch (IOException e) {
                             System.out.println("err: image roi non trouvée");
                         }
@@ -196,7 +196,7 @@ public class Echiquier extends JComponent {
                     else {couleurPiece = "noir";}
                     {
                         try {
-                            iconePiece = ImageIO.read(new FileInputStream("ProjetMMNEchecs/images/"+ couleurPiece +"/reine.png"));
+                            iconePiece = ImageIO.read(new FileInputStream("images/"+ couleurPiece +"/reine.png"));
                         } catch (IOException e) {
                             System.out.println("err: image reine non trouvée");
                         }

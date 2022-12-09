@@ -16,7 +16,7 @@ public class Echiquier extends JComponent {
     private List<List<Piece>> plateau;
     private BufferedImage iconePiece;
     private int cptMouvement = 0;
-    private String joueur = "";
+    private String joueur = "Noirs";
 
     /***
      * Getter du nom du joueur qui joue
@@ -400,8 +400,9 @@ public class Echiquier extends JComponent {
         collisionFou_Reine(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
 
         if(cptMouvement % 2 == 0){
-            this.joueur = "Blancs";
+
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==1) {
+                this.joueur = "Blancs";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString(); //this.joueur
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosition(prochaineCase);
@@ -413,12 +414,17 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
+                if(this.joueur=="Noirs"){
+                    retourInfo = "Ce n'est pas votre tour !" ;
+                }else {
+                    retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
+                }
             }
         }
         else {
-            this.joueur = "Noirs";
+
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==0) {
+                this.joueur = "Noirs";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString();
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosition(prochaineCase);
@@ -429,7 +435,11 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                System.out.println("Vous ne pouvez pas vous déplacer ici");
+                if(this.joueur=="Blancs"){
+                    retourInfo = "Ce n'est pas votre tour !" ;
+                }else {
+                    retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
+                }
             }
         }
         return retourInfo;

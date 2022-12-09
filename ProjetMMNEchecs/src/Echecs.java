@@ -20,7 +20,6 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
-    private String tourJoueur= "Noirs";
 
     /***
      * Contructeur de Echecs
@@ -80,26 +79,22 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         if(positionX>=0 && positionY>=0 && positionX<=800 && positionY<=800){
             if(compteurDeplacement % 2 != 0){
                 caseActuelle = plateauDeJeu.getCaseActuelle(positionX/100,positionY/100);
-                info.setText("Vous avez selectionné la piece '"+ plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100).getNom()+"' en "+ caseActuelle.toString());
-                positionActuelleX = positionX/100;
-                positionActuelleY = positionY/100;
+                info.setText("Vous avez selectionné la piece '" + plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getNom() + "' en " + caseActuelle.toString());
+                positionActuelleX = positionX / 100;
+                positionActuelleY = positionY / 100;
                 nextMouvementCases = plateauDeJeu.getListeCase(positionActuelleX, positionActuelleY);
-            } else {
-                try{
-                    if(!nextMouvementCases.isEmpty()){
-                        info.setText(plateauDeJeu.actionMouvement(positionX/100, positionY/100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                        if(!plateauDeJeu.getJoueur().equals(tourJoueur)){
-                            tourJoueur=plateauDeJeu.getJoueur();
-                            joueur.setText("Au tour des " + tourJoueur);
-                        }else{
-                            info.setText("Ce n'est pas votre tour !");
-                        }
-                        nextMouvementCases.clear();
-                    }
-                }catch(Exception exe){
-                    System.out.println("La case Vide ne fait rien");
                 }
-            }
+                else {
+                    try{
+                        if(!nextMouvementCases.isEmpty()){
+                            info.setText(plateauDeJeu.actionMouvement(positionX/100, positionY/100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                            joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
+                            nextMouvementCases.clear();
+                        }
+                    }catch(Exception exe){
+                        System.out.println("La case Vide ne fait rien");
+                    }
+                }
         }else{
             System.out.println("Hors Plateau");
         }

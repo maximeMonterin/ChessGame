@@ -414,7 +414,7 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                if(this.joueur=="Noirs"){
+                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==0){
                     retourInfo = "Ce n'est pas votre tour !" ;
                 }else {
                     retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
@@ -435,7 +435,7 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                if(this.joueur=="Blancs"){
+                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==1){
                     retourInfo = "Ce n'est pas votre tour !" ;
                 }else {
                     retourInfo = "Vous ne pouvez pas vous déplacer ici" ;

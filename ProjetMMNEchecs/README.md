@@ -1,2 +1,5 @@
-# **CHESS GAME**
-> __BY DELESVAUX PINEL-GUINARD MONTERIN__
+**CHESS GAME**.
+``` BY DELESVAUX PINEL-GUINARD MONTERIN```.
+==============
+
+>\> How to play

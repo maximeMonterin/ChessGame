@@ -1,5 +1,5 @@
-**CHESS GAME**
-``` BY DELESVAUX PINEL-GUINARD MONTERIN```
+**CHESS GAME**.
+``` BY DELESVAUX PINEL-GUINARD MONTERIN```.
 ==============
 
 >\> How to play

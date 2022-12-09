@@ -1,5 +1,6 @@
-# **JEU D'ECHECS**\
-# ```PAR DELESVAUX PINEL-GUINARD MONTERIN```
+**JEU D'ECHECS**\
+ ```PAR DELESVAUX PINEL-GUINARD MONTERIN```
+ =
 
 >\> **Comment télécharger le jeu ?**
 \

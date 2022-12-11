@@ -6,7 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /***
  * Classe Echiquier heritant de Jcomponent
@@ -481,7 +483,25 @@ public class Echiquier extends JComponent {
                 mouvementRoi.remove(mvt);
             }
         }
-
         return mouvementRoi;
     }
+
+    public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){
+        HashMap<Piece, Case> inter = new HashMap<>();
+        for(List<Piece> piece: plateau){
+            for(Piece pi: piece){
+                if(!(pi instanceof Vide)){
+                    if(pi.getCouleurPiece()== couleur){
+                        for(Case c: pi.mouvement()){ //mouvement possible sans les collisions !!
+                            if(interposition.contains(c)){
+                                inter.put(pi,c);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return inter;
+    }
+
 }

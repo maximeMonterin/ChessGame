@@ -463,4 +463,25 @@ public class Echiquier extends JComponent {
     public List<List<Piece>> getPlateau() {
         return plateau;
     }
+
+    public List<Case> getMouvementEchecRoi(boolean couleur,int positionX,int positionY){
+        List<Case> mouvementRoi = getListeCase(positionX, positionY);
+        List<Case> mouvementTotauxAttaquant = new ArrayList<>();
+        for(List<Piece> piece: plateau){
+            for(Piece pi: piece){
+                if(!(pi instanceof Vide)){
+                    if(pi.getCouleurPiece()== !couleur){
+                        mouvementTotauxAttaquant.addAll(pi.mouvement());
+                    }
+                }
+            }
+        }
+        for(Case mvt: mouvementRoi){
+            if(mouvementTotauxAttaquant.contains(mvt)){
+                mouvementRoi.remove(mvt);
+            }
+        }
+
+        return mouvementRoi;
+    }
 }

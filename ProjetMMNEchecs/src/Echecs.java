@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 /***
  * Classe Echecs
@@ -83,9 +84,9 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                 positionActuelleX = positionX / 100;
                 positionActuelleY = positionY / 100;
                 nextMouvementCases = plateauDeJeu.getListeCase(positionActuelleX, positionActuelleY);
-                for(Case cases : nextMouvementCases){
+                /*for(Case cases : nextMouvementCases){
                     cases.
-                }
+                }*/
 
                 }
                 else {
@@ -97,6 +98,10 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                     if( plateauDeJeu.getListeCase(positionX/100, positionY/100).contains(new Case(piece.getPosx(),piece.getPosy())) &&piece instanceof Roi && ((Roi) piece).getCouleur() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
                                             ((Roi) piece).setEchec(true);
                                             info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec");
+                                            /*if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur()?true:false, positionX/100, positionY/100).isEmpty()){
+                                                info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec & Mat !");
+                                                //fin de partie
+                                            }*/
                                             break;
                                     }
                                 }

@@ -13,7 +13,7 @@ public class Tour extends Piece {
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Tour(int couleur, int posx, int posy) {
+    public Tour(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
@@ -21,7 +21,7 @@ public class Tour extends Piece {
      * Getter pour recupérer la couleur de la Tour
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
     }
 

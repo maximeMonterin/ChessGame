@@ -50,8 +50,8 @@ public class Echiquier extends JComponent {
      */
     public void setPions(){
         for(int i=0;i<8;i++){
-            plateau.get(1).set(i,new Pion(0,1, i ));
-            plateau.get(6).set(i,new Pion(1,6, i));
+            plateau.get(1).set(i,new Pion(false,1, i ));
+            plateau.get(6).set(i,new Pion(true,6, i));
         }
     }
 
@@ -59,46 +59,46 @@ public class Echiquier extends JComponent {
      * Initialise les tours virtuellement dans le plateau
      */
     public void setTours(){
-        plateau.get(0).set(0,new Tour(0, 0, 0));
-        plateau.get(0).set(7,new Tour(0, 0, 7));
-        plateau.get(7).set(0,new Tour(1, 7, 0));
-        plateau.get(7).set(7,new Tour(1, 7, 7));
+        plateau.get(0).set(0,new Tour(false, 0, 0));
+        plateau.get(0).set(7,new Tour(false, 0, 7));
+        plateau.get(7).set(0,new Tour(true, 7, 0));
+        plateau.get(7).set(7,new Tour(true, 7, 7));
     }
 
     /***
      * Initialise les cavaliers virtuellement dans le plateau
      */
     public void setCavaliers(){
-        plateau.get(0).set(1,new Cavalier(0, 0, 1));
-        plateau.get(0).set(6,new Cavalier(0, 0, 6));
-        plateau.get(7).set(1,new Cavalier(1, 7, 1));
-        plateau.get(7).set(6,new Cavalier(1, 7, 6));
+        plateau.get(0).set(1,new Cavalier(false, 0, 1));
+        plateau.get(0).set(6,new Cavalier(false, 0, 6));
+        plateau.get(7).set(1,new Cavalier(true, 7, 1));
+        plateau.get(7).set(6,new Cavalier(true, 7, 6));
     }
 
     /***
      * Initialise les fous virtuellement dans le plateau
      */
     public void setFous(){
-        plateau.get(0).set(2,new Fou(0, 0, 2));
-        plateau.get(0).set(5,new Fou(0, 0, 5));
-        plateau.get(7).set(2,new Fou(1, 7, 2));
-        plateau.get(7).set(5,new Fou(1, 7, 5));
+        plateau.get(0).set(2,new Fou(false, 0, 2));
+        plateau.get(0).set(5,new Fou(false, 0, 5));
+        plateau.get(7).set(2,new Fou(true, 7, 2));
+        plateau.get(7).set(5,new Fou(true, 7, 5));
     }
 
     /***
      * Initialise les rois virtuellement dans le plateau
      */
     public void setRois(){
-        plateau.get(0).set(4,new Roi(0,0, 4));
-        plateau.get(7).set(4,new Roi(1,7, 4));
+        plateau.get(0).set(4,new Roi(false,0, 4));
+        plateau.get(7).set(4,new Roi(true,7, 4));
     }
 
     /***
      * Initialise les reines virtuellement dans le plateau
      */
     public void setReines(){
-        plateau.get(0).set(3,new Reine(0,0, 3));
-        plateau.get(7).set(3,new Reine(1,7, 3));
+        plateau.get(0).set(3,new Reine(false,0, 3));
+        plateau.get(7).set(3,new Reine(true,7, 3));
     }
 
     /***
@@ -126,7 +126,7 @@ public class Echiquier extends JComponent {
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(plateau.get(i).get(j) instanceof Pion){
-                    if(((Pion) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Pion) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     try {
                         iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/pion.png"));
@@ -137,7 +137,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Tour){
-                    if(((Tour) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Tour) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -150,7 +150,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Cavalier){
-                    if(((Cavalier) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Cavalier) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -164,7 +164,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Fou){
-                    if(((Fou) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Fou) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -178,7 +178,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Roi){
-                    if(((Roi) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Roi) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -192,7 +192,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Reine){
-                    if(((Reine) plateau.get(i).get(j)).getCouleur() == 0){couleurPiece = "blanc";}
+                    if(!((Reine) plateau.get(i).get(j)).getCouleur()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -276,10 +276,10 @@ public class Echiquier extends JComponent {
             if(plateau.get(positionActuelleX).get(positionActuelleY) instanceof Pion){
                 mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
-                if(!(plateau.get(positionActuelleX-1).get(positionActuelleY) instanceof Vide) && ((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleur() == 1){
+                if(!(plateau.get(positionActuelleX-1).get(positionActuelleY) instanceof Vide) && ((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleur() == true){
                     mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 }
-                else if(!(plateau.get(positionActuelleX+1).get(positionActuelleY) instanceof Vide) && ((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleur() == 0){
+                else if(!(plateau.get(positionActuelleX+1).get(positionActuelleY) instanceof Vide) && ((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleur() == false){
                     mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 }
             }
@@ -401,7 +401,7 @@ public class Echiquier extends JComponent {
 
         if(cptMouvement % 2 == 0){
 
-            if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==1) {
+            if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==true) {
                 this.joueur = "Blancs";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString(); //this.joueur
@@ -414,7 +414,7 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==0){
+                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==false){
                     retourInfo = "Ce n'est pas votre tour !" ;
                 }else {
                     retourInfo = "Vous ne pouvez pas vous déplacer ici" ;
@@ -423,7 +423,7 @@ public class Echiquier extends JComponent {
         }
         else {
 
-            if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==0) {
+            if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==false) {
                 this.joueur = "Noirs";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString();
@@ -435,7 +435,7 @@ public class Echiquier extends JComponent {
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
-                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==1){
+                if(plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()==true){
                     retourInfo = "Ce n'est pas votre tour !" ;
                 }else {
                     retourInfo = "Vous ne pouvez pas vous déplacer ici" ;

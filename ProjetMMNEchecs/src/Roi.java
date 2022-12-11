@@ -7,13 +7,15 @@ import java.util.List;
  */
 public class Roi extends Piece {
 
+    private boolean isEchec=false;
+
     /***
      * Constructeur de Roi
      * @param couleur couleur du Roi (0=Blanc; 1=Noir)
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Roi(int couleur, int posx, int posy) {
+    public Roi(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
@@ -21,8 +23,16 @@ public class Roi extends Piece {
      * Getter pour recupérer la couleur du Roi
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
+    }
+
+    public boolean isEchec() {
+        return isEchec;
+    }
+
+    public void setEchec(boolean echec) {
+        isEchec = echec;
     }
 
     /***

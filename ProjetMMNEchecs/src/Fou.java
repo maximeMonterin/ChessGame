@@ -13,7 +13,7 @@ public class Fou extends Piece {
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Fou(int couleur,int posx, int posy) {
+    public Fou(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
@@ -21,7 +21,7 @@ public class Fou extends Piece {
      * Getter pour recupérer la couleur du Fou
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
     }
 

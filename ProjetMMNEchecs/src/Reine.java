@@ -13,7 +13,7 @@ public class Reine extends Piece{
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Reine(int couleur, int posx, int posy) {
+    public Reine(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy,couleur);
     }
 
@@ -21,7 +21,7 @@ public class Reine extends Piece{
      * Getter pour recupérer la couleur de la Reine
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
     }
 

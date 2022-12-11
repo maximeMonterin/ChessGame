@@ -13,7 +13,7 @@ public class Cavalier extends Piece{
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Cavalier(int couleur, int posx, int posy) {
+    public Cavalier(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
@@ -21,7 +21,7 @@ public class Cavalier extends Piece{
      * Getter pour recupérer la couleur du Cavalier
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
     }
 

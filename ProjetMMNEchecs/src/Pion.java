@@ -13,7 +13,7 @@ public class Pion extends Piece{
      * @param posx position x sur l'échiquier
      * @param posy position y sur l'échiquier
      */
-    public Pion(int couleur, int posx, int posy) {
+    public Pion(Boolean couleur, int posx, int posy) {
         super(new Case(posx, posy), posx, posy,couleur);
     }
 
@@ -21,7 +21,7 @@ public class Pion extends Piece{
      * Getter pour recupérer la couleur du Pion
      * @return int
      */
-    public int getCouleur(){
+    public Boolean getCouleur(){
         return this.getCouleurPiece();
     }
 
@@ -41,7 +41,7 @@ public class Pion extends Piece{
     @Override
     public List<Case> mouvement(){
         List<Case> res = new ArrayList<>();
-        if(couleur == 1){ // couleur noir, en bas
+        if(couleur){ // couleur noir, en bas
             res.add(new Case(this.getPosx()-1, this.getPosy()));
             if(this.getPosx() == 6) {
                 res.add(new Case(this.getPosx() - 2, this.getPosy()));
@@ -49,7 +49,7 @@ public class Pion extends Piece{
             res.add(new Case(this.getPosx()-1, this.getPosy()+1));
             res.add(new Case(this.getPosx()-1, this.getPosy()-1));
         }
-        else if(couleur ==0){ // couleur blanc , en haut
+        else{ // couleur blanc , en haut
             res.add (new Case(this.getPosx() +1, this.getPosy()));
             if(this.getPosx() == 1) {
                 res.add(new Case(this.getPosx() + 2, this.getPosy()));

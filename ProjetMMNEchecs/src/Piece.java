@@ -8,13 +8,16 @@ public abstract class Piece {
     private int posx;
     private int posy;
     protected Case position;
-    protected int couleur;
+    protected Boolean couleur;
+    /*True = colore = Noir
+        false = non colore = blanc
+     */
 
     /***
      * Getter pour recupérer la couleur de la Piece
      * @return int
      */
-    public int getCouleurPiece() {
+    public Boolean getCouleurPiece() {
         return couleur;
     }
 
@@ -28,7 +31,7 @@ public abstract class Piece {
         this.position = position;
         this.posx = posx;
         this.posy = posy;
-        this.couleur = 0;
+        this.couleur = false;
     }
 
     /***
@@ -38,7 +41,7 @@ public abstract class Piece {
      * @param posy la position en y de la case
      * @param couleur la couleur de la piece
      */
-    public Piece(Case position, int posx, int posy, int couleur) {
+    public Piece(Case position, int posx, int posy, Boolean couleur) {
         this(position, posx, posy);
         this.couleur = couleur;
     }

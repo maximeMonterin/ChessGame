@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /***
  * Classe Echiquier heritant de Jcomponent
@@ -264,7 +263,7 @@ public class Echiquier extends JComponent {
      * @param positionActuelleY position en y actuelle de la piece
      * @return boolean (true si la piece peut manger sinon false)
      */
-    public boolean Manger(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
+    public boolean mangerPiece(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         Boolean peutManger = true;
         if(!(plateau.get(positionX).get(positionY) instanceof Vide) ){
             peutManger =plateau.get(positionActuelleX).get(positionActuelleY).manger(plateau.get(positionX).get(positionY));
@@ -302,14 +301,14 @@ public class Echiquier extends JComponent {
             if(positionX == positionActuelleX){
                 if(positionActuelleY-positionY > 0) {
                     for (int i = 1; i < Math.abs(positionActuelleY - positionY); ++i) {
-                        if (!(plateau.get(positionActuelleX).get(positionActuelleY-i) instanceof Vide)) {
+                        if (!(plateau.get(positionActuelleX).get(positionActuelleY-i) instanceof Vide) ) {
                             mouvementCasesPossibles.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
                 }else if (positionActuelleY-positionY < 0){
                     for (int i = 1; i < Math.abs(positionActuelleY - positionY); ++i) {
-                        if (!(plateau.get(positionActuelleX).get(positionActuelleY+i) instanceof Vide)) {
+                        if (!(plateau.get(positionActuelleX).get(positionActuelleY+i) instanceof Vide)  ) {
                             mouvementCasesPossibles.remove(new Case(positionX,positionY));
                             break;
                         }
@@ -319,14 +318,14 @@ public class Echiquier extends JComponent {
             else if(positionY == positionActuelleY){
                 if(positionActuelleX-positionX > 0) {
                     for (int i = 1; i < Math.abs(positionActuelleX - positionX); ++i) {
-                        if (!(plateau.get(positionActuelleX - i).get(positionY) instanceof Vide)) {
+                        if (!(plateau.get(positionActuelleX - i).get(positionY) instanceof Vide) ) {
                             mouvementCasesPossibles.remove(new Case(positionX,positionY));
                             break;
                         }
                     }
                 }else if (positionActuelleX-positionX < 0){
                     for (int i = 1; i < Math.abs(positionActuelleX - positionX); ++i) {
-                        if (!(plateau.get(positionActuelleX + i).get(positionY) instanceof Vide)) {
+                        if (!(plateau.get(positionActuelleX + i).get(positionY) instanceof Vide) ) {
                             mouvementCasesPossibles.remove(new Case(positionX,positionY));
                             break;
                         }
@@ -350,15 +349,15 @@ public class Echiquier extends JComponent {
                 if(positionY<positionActuelleY){
                     for(int i=1;i<Math.abs(positionActuelleX-positionX);++i){
                         if(!(plateau.get(positionActuelleX-i).get(positionActuelleY-i) instanceof Vide)){
-                            mouvementCasesPossibles.remove(new Case(positionX, positionY));
-                            break;
+                                mouvementCasesPossibles.remove(new Case(positionX, positionY));
+                                break;
                         }
                     }
                 }else if(positionY>positionActuelleY){
                     for(int i=1;i<Math.abs(positionActuelleX-positionX);++i){
                         if(!(plateau.get(positionActuelleX-i).get(positionActuelleY+i) instanceof Vide)){
-                            mouvementCasesPossibles.remove(new Case(positionX, positionY));
-                            break;
+                                mouvementCasesPossibles.remove(new Case(positionX, positionY));
+                                break;
                         }
                     }
 
@@ -367,16 +366,16 @@ public class Echiquier extends JComponent {
                 if (positionY < positionActuelleY) {
                     for (int i = 1; i < Math.abs(positionActuelleX - positionX); ++i) {
                         if (!(plateau.get(positionActuelleX + i).get(positionActuelleY - i) instanceof Vide)) {
-                            mouvementCasesPossibles.remove(new Case(positionX, positionY));
-                            break;
+                                mouvementCasesPossibles.remove(new Case(positionX, positionY));
+                                break;
                         }
                     }
 
                 } else if (positionY > positionActuelleY) {
                     for (int i = 1; i < Math.abs(positionActuelleX - positionX); ++i) {
                         if (!(plateau.get(positionActuelleX + i).get(positionActuelleY + i) instanceof Vide)) {
-                            mouvementCasesPossibles.remove(new Case(positionX, positionY));
-                            break;
+                                mouvementCasesPossibles.remove(new Case(positionX, positionY));
+                                break;
                         }
                     }
 
@@ -397,7 +396,7 @@ public class Echiquier extends JComponent {
     public String actionMouvement(int positionX, int positionY, List<Case> mouvementCasesPossibles, int positionActuelleX, int positionActuelleY){
         String retourInfo="";
         Case prochaineCase = this.getCaseActuelle(positionX, positionY);
-        boolean peutManger = Manger(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
+        boolean peutManger = mangerPiece(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
         collisionTour_Reine(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
         collisionFou_Reine(positionX, positionY, mouvementCasesPossibles, positionActuelleX, positionActuelleY);
 
@@ -467,23 +466,34 @@ public class Echiquier extends JComponent {
     }
 
     public List<Case> getMouvementEchecRoi(boolean couleur,int positionX,int positionY){
-        List<Case> mouvementRoi = getListeCase(positionX, positionY);
+        List<Case> mouvementRoi = new ArrayList<>();
+        List<Case> tmp = getListeCase(positionX, positionY);
+        for(Case pieceEff: tmp){
+            if(plateau.get(pieceEff.getPosx()).get(pieceEff.getPosy()) instanceof Vide || plateau.get(pieceEff.getPosx()).get(pieceEff.getPosy()).getCouleurPiece()!= couleur){
+                mouvementRoi.add(pieceEff);
+            }
+        }
+        System.out.println((mouvementRoi));
         List<Case> mouvementTotauxAttaquant = new ArrayList<>();
+        System.out.println((mouvementTotauxAttaquant));
         for(List<Piece> piece: plateau){
-            for(Piece pi: piece){
-                if(!(pi instanceof Vide)){
-                    if(pi.getCouleurPiece()== !couleur){
-                        mouvementTotauxAttaquant.addAll(pi.mouvement());
+            for(Piece pi: piece) {
+                if (!(pi instanceof Vide) && pi.getCouleurPiece() == !couleur) {
+                    List<Case> mouvementRoi1 = pi.mouvement();
+
+                    for (Case c : pi.mouvement()) {
+                        collisionFou_Reine(c.getPosx(), c.getPosy(), mouvementRoi1, pi.getPosx(), pi.getPosy());
+                        collisionTour_Reine(c.getPosx(), c.getPosy(), mouvementRoi1, pi.getPosx(), pi.getPosy());
                     }
+                    mouvementTotauxAttaquant.addAll(mouvementRoi1);
                 }
             }
         }
-        for(Case mvt: mouvementRoi){
-            if(mouvementTotauxAttaquant.contains(mvt)){
-                mouvementRoi.remove(mvt);
-            }
-        }
+        mouvementRoi.removeAll(mouvementTotauxAttaquant);
+
+        System.out.println(mouvementRoi);
         return mouvementRoi;
+
     }
 
     public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){

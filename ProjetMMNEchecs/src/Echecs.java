@@ -4,19 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 /***
  * Classe Echecs
  * Defini le jeu des Échecs avec une interface Graphique associée
  */
 public class Echecs extends JFrame implements ActionListener, MouseListener {
-    private Echiquier plateauDeJeu;
+    private final Echiquier plateauDeJeu;
     private List<Case> nextMouvementCases;
     private Case caseActuelle;
-    private JLabel titre;
-    private JLabel joueur;
-    private JLabel info;
+    private final JLabel titre;
+    private final JLabel joueur;
+    private final JLabel info;
     public static JLabel timer = new JLabel(Main.time);
     private int compteurDeplacement = 0;
     private int positionActuelleX;
@@ -103,12 +102,12 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                         plateauDeJeu.collisionTour_Reine(tmp.getPosx(),tmp.getPosy(),caseRoiPossible,positionX/100,positionY/100);
                                         plateauDeJeu.collisionFou_Reine(tmp.getPosx(),tmp.getPosy(),caseRoiPossible,positionX/100,positionY/100);
                                     }
-                                    if( caseRoiPossible.contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleur() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
+                                    if( caseRoiPossible.contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
                                             ((Roi) piece).setEchec(true);
-                                            info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec ");
+                                            info.setText("Le joueur " + (((Roi) piece).getCouleurPiece()?"Noir":"Blanc") + " est en Echec ");
                                             //System.out.println(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur(), positionX/100, positionY/100));
-                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur(), tmp.getPosx(), tmp.getPosy()).isEmpty() /*&& plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleur(),inter).isEmpty()*/){
-                                                info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec & Mat !");
+                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy()).isEmpty() /*&& plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleur(),inter).isEmpty()*/){
+                                                info.setText("Le joueur " + (((Roi) piece).getCouleurPiece()?"Noir":"Blanc") + " est en Echec & Mat !");
                                                 //fin de partie
                                             }
                                             break;

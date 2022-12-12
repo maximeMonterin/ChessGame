@@ -19,14 +19,6 @@ public class Roi extends Piece {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
-    /***
-     * Getter pour recupérer la couleur du Roi
-     * @return int
-     */
-    public Boolean getCouleur(){
-        return this.getCouleurPiece();
-    }
-
     public boolean isEchec() {
         return isEchec;
     }

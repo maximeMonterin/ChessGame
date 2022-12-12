@@ -18,14 +18,6 @@ public class Reine extends Piece{
     }
 
     /***
-     * Getter pour recupérer la couleur de la Reine
-     * @return int
-     */
-    public Boolean getCouleur(){
-        return this.getCouleurPiece();
-    }
-
-    /***
      * Getter pour récuperer le Nom de la Piece
      * @return String
      */

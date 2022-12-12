@@ -93,13 +93,16 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                     try{
                         if(!nextMouvementCases.isEmpty()){
                             info.setText(plateauDeJeu.actionMouvement(positionX/100, positionY/100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                            List<Case> caseRoiPossible=plateauDeJeu.getListeCase(positionX/100, positionY/100);
                             for(List<Piece> pieces : plateauDeJeu.getPlateau()){
                                 for(Piece piece : pieces){
                                     Case tmp = new Case(piece.getPosx(),piece.getPosy());
-                                    if( plateauDeJeu.getListeCase(positionX/100, positionY/100).contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleur() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
+                                    plateauDeJeu.collisionTour_Reine(tmp.getPosx(),tmp.getPosy(),caseRoiPossible,positionX/100,positionY/100);
+                                    plateauDeJeu.collisionFou_Reine(tmp.getPosx(),tmp.getPosy(),caseRoiPossible,positionX/100,positionY/100);
+                                    if( caseRoiPossible.contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleur() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
                                             ((Roi) piece).setEchec(true);
                                             info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec ");
-                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur()?true:false, positionX/100, positionY/100).isEmpty() /*&& plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleur()?true:false,inter).isEmpty()*/){
+                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur(), positionX/100, positionY/100).isEmpty() /*&& plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleur(),inter).isEmpty()*/){
                                                 info.setText("Le joueur " + (((Roi) piece).getCouleur()?"Noir":"Blanc") + " est en Echec & Mat !");
                                                 //fin de partie
                                             }

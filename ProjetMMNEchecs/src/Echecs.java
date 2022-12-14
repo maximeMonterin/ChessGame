@@ -126,8 +126,8 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                 if(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi && !mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossibleRoiEnEchec.contains(new Case(positionX/100,positionY/100))) {
                                     ((Roi) plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)).setEchec(false);
                                     info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                                }else if(!mouvementPossiblePieceEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.get(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)) == new Case(positionX/100,positionY/100)){
-                                    ((Roi) plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100)).setEchec(false);
+                                }else if(!mouvementPossiblePieceEnEchec.isEmpty() && !(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi)){
+                                    plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY).getCouleurPiece()).setEchec(false);
                                     info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
                                 }else{
                                     info.setText("Vous ne pouvez pas jouer cette pièce car vous êtes en Echec!");

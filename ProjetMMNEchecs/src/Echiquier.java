@@ -555,19 +555,19 @@ public class Echiquier extends JComponent {
         for(List<Piece> piece: plateau){
             for(Piece pi: piece){
                 if(!(pi instanceof Vide) && !(pi instanceof Roi) && pi.getCouleurPiece() == couleur){
-                        List<Case> mouvementPieceProtectrice= pi.mouvement();
-                        for(Case c: pi.mouvement()){
-                            if(!(pi instanceof Pion)) {
-                                collisionFou_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
-                                collisionTour_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
-                            }else{
-                                mangerPiece(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
-                            }
-                            if(interposition.contains(c)){
-                                inter.put(pi,c);
-                            }
+                List<Case> mouvementPieceProtectrice= pi.mouvement();
+                if(pi instanceof Pion){
+                    mouvementPieceProtectrice.remove(mouvementPieceProtectrice.size()-1);
+                    mouvementPieceProtectrice.remove(mouvementPieceProtectrice.size()-1);
+                }
+                    for(Case c: interposition){
+                        collisionFou_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
+                        collisionTour_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
+                        if(mouvementPieceProtectrice.contains(c)){
+                            inter.put(pi,c);
                         }
                     }
+                }
                 }
             }
         System.out.println(inter);

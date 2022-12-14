@@ -462,7 +462,7 @@ public class Echiquier extends JComponent {
         if(cptMouvement % 2 == 0){
 
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()) {
-                this.joueur = "Blancs";
+                this.joueur = "Beiges";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString(); //this.joueur
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosition(prochaineCase);
@@ -484,7 +484,7 @@ public class Echiquier extends JComponent {
         else {
 
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && !plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()) {
-                this.joueur = "Noirs";
+                this.joueur = "Bleus";
                 ++cptMouvement;
                 retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString();
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosition(prochaineCase);
@@ -571,6 +571,15 @@ public class Echiquier extends JComponent {
             }
         }
         return inter;
+    }
+
+    public Roi getRoi(boolean couleur){
+        Roi roiAReturn = null;
+        for (List<Piece> pieces : plateau)
+            for (Piece piece : pieces)
+                if(piece instanceof Roi && piece.getCouleurPiece()==couleur)
+                    roiAReturn= (Roi) piece;
+        return roiAReturn;
     }
 
 }

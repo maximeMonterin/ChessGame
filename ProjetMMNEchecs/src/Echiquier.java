@@ -288,6 +288,65 @@ public class Echiquier extends JComponent {
         return peutManger;
     }
 
+    public List<Case> getCaseEntre(int posX1, int posY1 , int posXRoi, int posYRoi){
+        List<Case> result = new ArrayList<>();
+        if(!(plateau.get(posX1).get(posY1) instanceof Cavalier) || !(plateau.get(posX1).get(posY1) instanceof Pion) ){
+            if(plateau.get(posX1).get(posY1) instanceof Tour || plateau.get(posX1).get(posY1) instanceof Reine){
+                if(posX1 == posXRoi){
+                    if(posYRoi-posY1 > 0) {
+                        for (int i = 0; i < Math.abs(posYRoi - posY1); ++i) {
+                            result.add(new Case(posX1,posY1+i));
+                        }
+                    }else if (posYRoi-posY1 < 0){
+                        for (int i = 0; i < Math.abs(posYRoi - posY1); ++i) {
+                            result.add(new Case(posX1,posYRoi+i));
+                        }
+                    }
+                }
+                else if(posY1 == posYRoi){
+                    if(posXRoi-posX1> 0) {
+                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                            result.add(new Case(posX1+i,posY1));
+                        }
+                    }else if (posXRoi-posX1 < 0){
+                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                            result.add(new Case(posXRoi+i,posY1));
+                        }
+                    }
+                }
+            }
+            if(plateau.get(posX1).get(posY1) instanceof Fou || plateau.get(posX1).get(posY1) instanceof Reine){
+                if(posX1<posXRoi){
+                    if(posY1<posYRoi){
+                        for(int i=0;i<Math.abs(posXRoi-posX1);++i){
+                            result.add(new Case(posXRoi-i,posYRoi-i));
+                        }
+                    }else if(posY1>posYRoi){
+                        for(int i=0;i<Math.abs(posXRoi-posX1);++i){
+                            result.add(new Case(posXRoi-i,posYRoi+i));
+                        }
+
+                    }
+                }else if (posX1>posXRoi) {
+                    if (posY1< posYRoi) {
+                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                            result.add(new Case(posXRoi+i,posYRoi-i));
+                        }
+
+                    } else if (posY1 > posYRoi) {
+                        for (int i = 1; i < Math.abs(posXRoi - posX1); ++i) {
+                            result.add(new Case(posXRoi+i,posYRoi+i));
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+
     /***
      * Si la piece est une tour ou une reine, octroie ou non les mouvements réels que la piece peut faire horizontalement et verticalement
      * @param positionX position en x de où on veut aller avec la piece
@@ -472,9 +531,7 @@ public class Echiquier extends JComponent {
                 mouvementRoi.add(pieceEff);
             }
         }
-        System.out.println((mouvementRoi));
         List<Case> mouvementTotauxAttaquant = new ArrayList<>();
-        System.out.println((mouvementTotauxAttaquant));
         for(List<Piece> piece: plateau){
             for(Piece pi: piece) {
                 if (!(pi instanceof Vide) && pi.getCouleurPiece() == !couleur) {
@@ -490,18 +547,21 @@ public class Echiquier extends JComponent {
         }
         mouvementRoi.removeAll(mouvementTotauxAttaquant);
 
-        System.out.println(mouvementRoi);
         return mouvementRoi;
 
     }
 
     public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){
         HashMap<Piece, Case> inter = new HashMap<>();
+        List<Case> mouvementPieceProtectrice = new ArrayList<>();
         for(List<Piece> piece: plateau){
             for(Piece pi: piece){
                 if(!(pi instanceof Vide)){
                     if(pi.getCouleurPiece()== couleur){
-                        for(Case c: pi.mouvement()){ //mouvement possible sans les collisions !!
+                        mouvementPieceProtectrice=pi.mouvement();
+                        for(Case c: mouvementPieceProtectrice){ //mouvement possible sans les collisions !!
+                            collisionFou_Reine(c.getPosx(),c.getPosy(), mouvementPieceProtectrice,pi.getPosx(),pi.getPosy());
+                            collisionTour_Reine(c.getPosx(),c.getPosy(), mouvementPieceProtectrice,pi.getPosx(),pi.getPosy());
                             if(interposition.contains(c)){
                                 inter.put(pi,c);
                             }

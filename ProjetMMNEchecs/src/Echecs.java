@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 /***
  * Classe Echecs
@@ -103,10 +104,12 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                         plateauDeJeu.collisionFou_Reine(tmp.getPosx(),tmp.getPosy(),caseRoiPossible,positionX/100,positionY/100);
                                     }
                                     if( caseRoiPossible.contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
+                                            List<Case> inter=new ArrayList<>();
                                             ((Roi) piece).setEchec(true);
                                             info.setText("Le joueur " + (((Roi) piece).getCouleurPiece()?"Noir":"Blanc") + " est en Echec ");
-                                            //System.out.println(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleur(), positionX/100, positionY/100));
-                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy()).isEmpty() /*&& plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleur(),inter).isEmpty()*/){
+                                            inter= plateauDeJeu.getCaseEntre(positionX/100,positionY/100, piece.getPosx(),piece.getPosy());
+                                            //System.out.println(plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleurPiece(),inter));
+                                            if(plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy()).isEmpty() &&  plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleurPiece(),inter).isEmpty()){
                                                 info.setText("Le joueur " + (((Roi) piece).getCouleurPiece()?"Noir":"Blanc") + " est en Echec & Mat !");
                                                 //fin de partie
                                             }

@@ -19,6 +19,16 @@ public class Echiquier extends JComponent {
     private int cptMouvement = 0;
     private String joueur = "Noirs";
 
+    private boolean finDePartie= false;
+
+    public boolean isFinDePartie() {
+        return finDePartie;
+    }
+
+    public void setFinDePartie(boolean finDePartie) {
+        this.finDePartie = finDePartie;
+    }
+
     /***
      * Getter du nom du joueur qui joue
      * @return String
@@ -570,7 +580,6 @@ public class Echiquier extends JComponent {
                 }
                 }
             }
-        System.out.println(inter);
         return inter;
     }
 

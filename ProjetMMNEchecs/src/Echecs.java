@@ -110,11 +110,10 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                             info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec ");
                                             List<Case> inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, piece.getPosx(), piece.getPosy());
                                             mouvementPossibleRoiEnEchec = plateauDeJeu.getMouvementEchecRoi((piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy());
-                                            System.out.println(mouvementPossibleRoiEnEchec);
                                             mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
                                             if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
                                                 info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
-                                                //fin de partie
+                                                plateauDeJeu.setFinDePartie(true);
                                             }
                                             break;
                                         }

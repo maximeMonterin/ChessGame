@@ -22,6 +22,8 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
+    private List<Case> mouvementPossibleRoiEnEchec = new ArrayList<>();
+    private HashMap<Piece,Case> mouvementPossiblePieceEnEchec = new HashMap<>();
 
     /***
      * Contructeur de Echecs
@@ -85,9 +87,6 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                 positionActuelleX = positionX / 100;
                 positionActuelleY = positionY / 100;
                 nextMouvementCases = plateauDeJeu.getListeCase(positionActuelleX, positionActuelleY);
-                /*for(Case cases : nextMouvementCases){
-                    plateauDeJeu.getListeCase(cases.getPosx(), cases.getPosy());
-                }*/
 
                 }
                 else {
@@ -106,14 +105,15 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                             plateauDeJeu.collisionTour_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                             plateauDeJeu.collisionFou_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                         }
-                                        if (caseRoiPossible.contains(tmp) && piece instanceof Roi && ((Roi) piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
-                                            List<Case> inter = new ArrayList<>();
+                                        if (caseRoiPossible.contains(tmp) && piece instanceof Roi && (piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
                                             ((Roi) piece).setEchec(true);
-                                            info.setText("Le joueur " + (((Roi) piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec ");
-                                            inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, piece.getPosx(), piece.getPosy());
-                                            //System.out.println(plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleurPiece(),inter));
-                                            if (plateauDeJeu.getMouvementEchecRoi(((Roi) piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy()).isEmpty() && plateauDeJeu.getMouvementProtectionRoi(((Roi) piece).getCouleurPiece(), inter).isEmpty()) {
-                                                info.setText("Le joueur " + (((Roi) piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
+                                            info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec ");
+                                            List<Case> inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, piece.getPosx(), piece.getPosy());
+                                            mouvementPossibleRoiEnEchec = plateauDeJeu.getMouvementEchecRoi((piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy());
+                                            System.out.println(mouvementPossibleRoiEnEchec);
+                                            mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
+                                            if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
+                                                info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
                                                 //fin de partie
                                             }
                                             break;
@@ -123,16 +123,11 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                 joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
                                 nextMouvementCases.clear();
                             } else {
-                                Roi roi = plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece());
-                                List<Case> casePossibleRoi = plateauDeJeu.getMouvementEchecRoi(roi.getCouleurPiece(), positionX / 100, positionY);
-
-                                List<Case> inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, roi.getPosx(), roi.getPosy());
-                                HashMap<Piece, Case> caseProtectRoi = (plateauDeJeu.getMouvementProtectionRoi(roi.getCouleurPiece(), inter));
-
-                                if (plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100) instanceof Roi && !(casePossibleRoi.isEmpty())) {
+                                if(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi && !mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossibleRoiEnEchec.contains(new Case(positionX/100,positionY/100))) {
+                                    ((Roi) plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)).setEchec(false);
                                     info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
-
-                                } else if (!caseProtectRoi.isEmpty()) {
+                                }else if(!mouvementPossiblePieceEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.get(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)) == new Case(positionX/100,positionY/100)){
+                                    ((Roi) plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100)).setEchec(false);
                                     info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
                                 }else{
                                     info.setText("Vous ne pouvez pas jouer cette pièce car vous êtes en Echec!");

@@ -294,22 +294,22 @@ public class Echiquier extends JComponent {
             if(plateau.get(posX1).get(posY1) instanceof Tour || plateau.get(posX1).get(posY1) instanceof Reine){
                 if(posX1 == posXRoi){
                     if(posYRoi-posY1 > 0) {
-                        for (int i = 0; i < Math.abs(posYRoi - posY1); ++i) {
+                        for (int i = 1; i < Math.abs(posYRoi - posY1); ++i) {
                             result.add(new Case(posX1,posY1+i));
                         }
                     }else if (posYRoi-posY1 < 0){
-                        for (int i = 0; i < Math.abs(posYRoi - posY1); ++i) {
+                        for (int i = 1; i < Math.abs(posYRoi - posY1); ++i) {
                             result.add(new Case(posX1,posYRoi+i));
                         }
                     }
                 }
                 else if(posY1 == posYRoi){
                     if(posXRoi-posX1> 0) {
-                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                        for (int i = 1; i < Math.abs(posXRoi - posX1); ++i) {
                             result.add(new Case(posX1+i,posY1));
                         }
                     }else if (posXRoi-posX1 < 0){
-                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                        for (int i = 1; i < Math.abs(posXRoi - posX1); ++i) {
                             result.add(new Case(posXRoi+i,posY1));
                         }
                     }
@@ -318,18 +318,18 @@ public class Echiquier extends JComponent {
             if(plateau.get(posX1).get(posY1) instanceof Fou || plateau.get(posX1).get(posY1) instanceof Reine){
                 if(posX1<posXRoi){
                     if(posY1<posYRoi){
-                        for(int i=0;i<Math.abs(posXRoi-posX1);++i){
+                        for(int i=1;i<Math.abs(posXRoi-posX1);++i){
                             result.add(new Case(posXRoi-i,posYRoi-i));
                         }
                     }else if(posY1>posYRoi){
-                        for(int i=0;i<Math.abs(posXRoi-posX1);++i){
+                        for(int i=1;i<Math.abs(posXRoi-posX1);++i){
                             result.add(new Case(posXRoi-i,posYRoi+i));
                         }
 
                     }
                 }else if (posX1>posXRoi) {
                     if (posY1< posYRoi) {
-                        for (int i = 0; i < Math.abs(posXRoi - posX1); ++i) {
+                        for (int i = 1; i < Math.abs(posXRoi - posX1); ++i) {
                             result.add(new Case(posXRoi+i,posYRoi-i));
                         }
 
@@ -470,7 +470,6 @@ public class Echiquier extends JComponent {
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosx(positionX);
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosy(positionY);
 
-
                 plateau.get(positionX).set(positionY, plateau.get(positionActuelleX).get(positionActuelleY));
                 plateau.get(positionActuelleX).set(positionActuelleY, new Vide(positionActuelleX, positionActuelleY));
             } else {
@@ -553,15 +552,17 @@ public class Echiquier extends JComponent {
 
     public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){
         HashMap<Piece, Case> inter = new HashMap<>();
-        List<Case> mouvementPieceProtectrice = new ArrayList<>();
         for(List<Piece> piece: plateau){
             for(Piece pi: piece){
-                if(!(pi instanceof Vide)){
-                    if(pi.getCouleurPiece()== couleur){
-                        mouvementPieceProtectrice=pi.mouvement();
-                        for(Case c: mouvementPieceProtectrice){ //mouvement possible sans les collisions !!
-                            collisionFou_Reine(c.getPosx(),c.getPosy(), mouvementPieceProtectrice,pi.getPosx(),pi.getPosy());
-                            collisionTour_Reine(c.getPosx(),c.getPosy(), mouvementPieceProtectrice,pi.getPosx(),pi.getPosy());
+                if(!(pi instanceof Vide) && !(pi instanceof Roi) && pi.getCouleurPiece() == couleur){
+                        List<Case> mouvementPieceProtectrice= pi.mouvement();
+                        for(Case c: pi.mouvement()){
+                            if(!(pi instanceof Pion)) {
+                                collisionFou_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
+                                collisionTour_Reine(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
+                            }else{
+                                mangerPiece(c.getPosx(), c.getPosy(), mouvementPieceProtectrice, pi.getPosx(), pi.getPosy());
+                            }
                             if(interposition.contains(c)){
                                 inter.put(pi,c);
                             }
@@ -569,7 +570,7 @@ public class Echiquier extends JComponent {
                     }
                 }
             }
-        }
+        System.out.println(inter);
         return inter;
     }
 

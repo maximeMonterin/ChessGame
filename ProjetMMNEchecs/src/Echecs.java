@@ -89,54 +89,56 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                 nextMouvementCases = plateauDeJeu.getListeCase(positionActuelleX, positionActuelleY);
 
                 }
-                else {
-                    try {
-                        if (!nextMouvementCases.isEmpty()) {
+            else {
+                try {
+                    if (!nextMouvementCases.isEmpty()) {
 
-                            if (!(plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()).isEchec())) {
-                                info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                                List<Case> caseRoiPossible = plateauDeJeu.getListeCase(positionX / 100, positionY / 100);
-                                for (List<Piece> pieces : plateauDeJeu.getPlateau()) {
-                                    for (Piece piece : pieces) {
-                                        Case tmp = new Case(piece.getPosx(), piece.getPosy());
-                                        if (piece instanceof Pion) {
-                                            plateauDeJeu.mangerPiece(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
-                                        } else {
+                        if (!(plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()).isEchec())) {
+                            info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                            List<Case> caseRoiPossible = plateauDeJeu.getListeCase(positionX / 100, positionY / 100);
+                            for (List<Piece> pieces : plateauDeJeu.getPlateau()) {
+                                for (Piece piece : pieces) {
+                                    Case tmp = new Case(piece.getPosx(), piece.getPosy());
+                                    if (piece instanceof Pion) {
+                                        plateauDeJeu.mangerPiece(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
+                                    } else {
+                                        if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Fou ||plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine)
                                             plateauDeJeu.collisionTour_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
+                                        else if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Tour)
                                             plateauDeJeu.collisionFou_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
+                                    }
+                                    if (caseRoiPossible.contains(tmp) && piece instanceof Roi && (piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
+                                        ((Roi) piece).setEchec(true);
+                                        info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec ");
+                                        List<Case> inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, piece.getPosx(), piece.getPosy());
+                                        mouvementPossibleRoiEnEchec = plateauDeJeu.getMouvementEchecRoi((piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy());
+                                        mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
+                                        if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
+                                            info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
+                                            plateauDeJeu.setFinDePartie(true);
                                         }
-                                        if (caseRoiPossible.contains(tmp) && piece instanceof Roi && (piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
-                                            ((Roi) piece).setEchec(true);
-                                            info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec ");
-                                            List<Case> inter = plateauDeJeu.getCaseEntre(positionX / 100, positionY / 100, piece.getPosx(), piece.getPosy());
-                                            mouvementPossibleRoiEnEchec = plateauDeJeu.getMouvementEchecRoi((piece).getCouleurPiece(), tmp.getPosx(), tmp.getPosy());
-                                            mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
-                                            if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
-                                                info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
-                                                plateauDeJeu.setFinDePartie(true);
-                                            }
-                                            break;
-                                        }
+                                        break;
                                     }
                                 }
-                                joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
-                                nextMouvementCases.clear();
-                            } else {
-                                if(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi && !mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossibleRoiEnEchec.contains(new Case(positionX/100,positionY/100))) {
-                                    ((Roi) plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)).setEchec(false);
-                                    info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                                }else if(!mouvementPossiblePieceEnEchec.isEmpty() && !(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi)){
-                                    plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY).getCouleurPiece()).setEchec(false);
-                                    info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
-                                }else{
-                                    info.setText("Vous ne pouvez pas jouer cette pièce car vous êtes en Echec!");
-                                }
+                            }
+                            joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
+                            nextMouvementCases.clear();
+                        } else {
+                            if(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi && !mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossibleRoiEnEchec.contains(new Case(positionX/100,positionY/100))) {
+                                ((Roi) plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY)).setEchec(false);
+                                info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                            }else if(!mouvementPossiblePieceEnEchec.isEmpty() && !(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi)){
+                                plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY).getCouleurPiece()).setEchec(false);
+                                info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
+                            }else{
+                                info.setText("Vous ne pouvez pas jouer cette pièce car vous êtes en Echec!");
                             }
                         }
-                    }catch(Exception exe){
-                        System.out.println("La case Vide ne fait rien");
                     }
+                }catch(Exception exe){
+                    System.out.println("La case Vide ne fait rien");
                 }
+            }
         }else{
             System.out.println("Hors Plateau");
         }

@@ -14,7 +14,7 @@ public class Main {
     /***
      * Constructeur de Main
      * Instancie un jeu d'echecs et son affichage
-     * @param args
+     * @param args String[]
      */
     public static void main(String[] args){
         TimerTask timerTask = new TimerTask() {

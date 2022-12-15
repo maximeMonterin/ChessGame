@@ -19,16 +19,6 @@ public class Echiquier extends JComponent {
     private int cptMouvement = 0;
     private String joueur = "Noirs";
 
-    private boolean finDePartie= false;
-
-    public boolean isFinDePartie() {
-        return finDePartie;
-    }
-
-    public void setFinDePartie(boolean finDePartie) {
-        this.finDePartie = finDePartie;
-    }
-
     /***
      * Getter du nom du joueur qui joue
      * @return String
@@ -137,7 +127,7 @@ public class Echiquier extends JComponent {
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(plateau.get(i).get(j) instanceof Pion){
-                    if(!((Pion) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     try {
                         iconePiece = ImageIO.read(new FileInputStream("images/" + couleurPiece + "/pion.png"));
@@ -148,7 +138,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Tour){
-                    if(!((Tour) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -161,7 +151,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Cavalier){
-                    if(!((Cavalier) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -175,7 +165,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Fou){
-                    if(!((Fou) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -189,7 +179,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Roi){
-                    if(!((Roi) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -203,7 +193,7 @@ public class Echiquier extends JComponent {
                 }
 
                 else if(plateau.get(i).get(j) instanceof Reine){
-                    if(!((Reine) plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
+                    if(!( plateau.get(i).get(j)).getCouleurPiece()){couleurPiece = "blanc";}
                     else {couleurPiece = "noir";}
                     {
                         try {
@@ -287,10 +277,10 @@ public class Echiquier extends JComponent {
             if(plateau.get(positionActuelleX).get(positionActuelleY) instanceof Pion){
                 mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
-                if(!(plateau.get(positionActuelleX-1).get(positionActuelleY) instanceof Vide) && ((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleurPiece()){
+                if(!(plateau.get(positionActuelleX-1).get(positionActuelleY) instanceof Vide) && ( plateau.get(positionActuelleX).get(positionActuelleY)).getCouleurPiece()){
                     mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 }
-                else if(!(plateau.get(positionActuelleX+1).get(positionActuelleY) instanceof Vide) && !((Pion) plateau.get(positionActuelleX).get(positionActuelleY)).getCouleurPiece()){
+                else if(!(plateau.get(positionActuelleX+1).get(positionActuelleY) instanceof Vide) && !( plateau.get(positionActuelleX).get(positionActuelleY)).getCouleurPiece()){
                     mouvementCasesPossibles.remove(mouvementCasesPossibles.size()-1);
                 }
             }
@@ -532,6 +522,13 @@ public class Echiquier extends JComponent {
         return plateau;
     }
 
+    /***
+     * Renvoie la liste des cases où le roi peut se déplacer pour se sortir de l'échec
+     * @param couleur boolean couleur du roi
+     * @param positionX int position en X
+     * @param positionY int position en Y
+     * @return List<Case>
+     */
     public List<Case> getMouvementEchecRoi(boolean couleur,int positionX,int positionY){
         List<Case> mouvementRoi = new ArrayList<>();
         List<Case> tmp = getListeCase(positionX, positionY);
@@ -560,6 +557,12 @@ public class Echiquier extends JComponent {
 
     }
 
+    /***
+     * Récupère les mouvements associés aux pieces permettant de protéger le roi pour stopper l'échec en cours
+     * @param couleur boolean couleur du roi attaqué
+     * @param interposition List<Case> cases entre le roi attaqué et la pièce qui attaque
+     * @return HashMap<Piece, Case>
+     */
     public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){
         HashMap<Piece, Case> inter = new HashMap<>();
         for(List<Piece> piece: plateau){
@@ -583,6 +586,11 @@ public class Echiquier extends JComponent {
         return inter;
     }
 
+    /***
+     * recupère le roi sur le plateau de la couleur donnée en paramètre
+     * @param couleur boolean couleur du roi attaqué
+     * @return Roi
+     */
     public Roi getRoi(boolean couleur){
         Roi roiAReturn = null;
         for (List<Piece> pieces : plateau)

@@ -9,9 +9,6 @@ public abstract class Piece {
     private int posy;
     protected Case position;
     protected Boolean couleur;
-    /*True = colore = Noir
-        false = non colore = blanc
-     */
 
     /***
      * Getter pour recupérer la couleur de la Piece
@@ -68,7 +65,7 @@ public abstract class Piece {
 
     /***
      * Setter de la Case sur laquelle la piece se trouve
-     * @param position
+     * @param position void
      */
     public void setPosition(Case position) {
         this.position = position;
@@ -84,7 +81,7 @@ public abstract class Piece {
 
     /***
      * Setter de la position en x de la case
-     * @param posx
+     * @param posx int
      */
     public void setPosx(int posx) {
         this.posx = posx;
@@ -100,7 +97,7 @@ public abstract class Piece {
 
     /***
      * Setter de la position en y de la case
-     * @param posy
+     * @param posy int
      */
     public void setPosy(int posy) {
         this.posy = posy;

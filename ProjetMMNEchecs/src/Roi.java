@@ -19,16 +19,24 @@ public class Roi extends Piece {
         super(new Case(posx, posy), posx, posy, couleur);
     }
 
-    public boolean isEchec() {
+    /***
+     * Getter pour récupérer si le roi est en échec
+     * @return boolean (true= Oui; false= Non)
+     */
+    public boolean estEchec() {
         return isEchec;
     }
 
+    /***
+     * Setter qui permet de mettre le roi en echec ou non
+     * @param echec
+     */
     public void setEchec(boolean echec) {
         isEchec = echec;
     }
 
     /***
-     * Getter pour récuperer le Nom de la Piece
+     * Getter pour récupérer le Nom de la Piece
      * @return String
      */
     @Override

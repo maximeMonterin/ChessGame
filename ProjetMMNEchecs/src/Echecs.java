@@ -93,7 +93,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                 try {
                     if (!nextMouvementCases.isEmpty()) {
 
-                        if (!(plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()).isEchec())) {
+                        if (!(plateauDeJeu.getRoi(plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()).estEchec())) {
                             info.setText(plateauDeJeu.actionMouvement(positionX / 100, positionY / 100, nextMouvementCases, positionActuelleX, positionActuelleY));
                             List<Case> caseRoiPossible = plateauDeJeu.getListeCase(positionX / 100, positionY / 100);
                             for (List<Piece> pieces : plateauDeJeu.getPlateau()) {
@@ -102,7 +102,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                     if (piece instanceof Pion) {
                                         plateauDeJeu.mangerPiece(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                     } else {
-                                        if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Fou ||plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine)
+                                        if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Fou || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine)
                                             plateauDeJeu.collisionTour_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                         else if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Tour)
                                             plateauDeJeu.collisionFou_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
@@ -115,7 +115,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                         mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
                                         if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
                                             info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
-                                            plateauDeJeu.setFinDePartie(true);
+                                            //fin de partie
                                         }
                                         break;
                                     }

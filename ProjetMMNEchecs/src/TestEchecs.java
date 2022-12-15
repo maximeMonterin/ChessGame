@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TestEchecs {
     @org.junit.jupiter.api.Test
     public void testCreerInstanceEchiquier(){
@@ -12,9 +13,7 @@ public class TestEchecs {
     public void testCreerInstanceCase(){Case c = new Case(0,5);}
 
     @org.junit.jupiter.api.Test
-    public void testCreerInstanceEchecs(){
-        Echecs echecs = new Echecs();
-    }
+    public void testCreerInstanceEchecs(){Echecs echecs = new Echecs();}
 
     @org.junit.jupiter.api.Test
     public void testCreerInstanceVide(){
@@ -47,9 +46,7 @@ public class TestEchecs {
     }
 
     @org.junit.jupiter.api.Test
-    public void testCreerInstanceRoi() {
-        Roi roi = new Roi(true, 0, 5);
-    }
+    public void testCreerInstanceRoi() {Roi roi = new Roi(true, 0, 5);}
 
     @Test
     public void testAccesseurPion() {
@@ -159,7 +156,7 @@ public class TestEchecs {
     public void testEqualsCase(){
         Case c= new Case(0,5);
         Case b= new Case(0,5);
-        assertEquals(c.equals(b), true);
+        assertEquals(c.equals(b),true);
     }
 
     @Test

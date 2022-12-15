@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /***
@@ -592,11 +593,13 @@ public class Echiquier extends JComponent {
      */
     public Roi getRoi(boolean couleur){
         Roi roiAReturn = null;
-        for (List<Piece> pieces : plateau)
-            for (Piece piece : pieces)
-                if(piece instanceof Roi && piece.getCouleurPiece()==couleur)
-                    roiAReturn= (Roi) piece;
+        Iterator<List<Piece>> it = plateau.listIterator();
+        while (it.hasNext()) {
+            for (Piece piece : it.next()) {
+                if (piece instanceof Roi && piece.getCouleurPiece() == couleur)
+                    roiAReturn = (Roi) piece;
+            }
+        }
         return roiAReturn;
     }
-
 }

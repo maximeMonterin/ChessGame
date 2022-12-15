@@ -26,7 +26,7 @@ public class Vide extends Piece {
 
     /***
      * Mouvements de Vide (Aucuns déplacements)
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement() {

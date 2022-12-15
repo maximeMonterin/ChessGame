@@ -28,7 +28,7 @@ public class Cavalier extends Piece{
 
     /***
      * Mouvements correspondant aux cases où pourra aller le Cavalier au prochain coup
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement() {

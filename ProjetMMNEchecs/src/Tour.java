@@ -28,7 +28,7 @@ public class Tour extends Piece {
 
     /***
      * Mouvements correspondant aux cases où pourra aller la Tour au prochain coup
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement() {

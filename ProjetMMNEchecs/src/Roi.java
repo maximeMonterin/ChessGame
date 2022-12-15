@@ -46,7 +46,7 @@ public class Roi extends Piece {
 
     /***
      * Mouvements correspondant aux cases où pourra aller le Roi au prochain coup
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement() {

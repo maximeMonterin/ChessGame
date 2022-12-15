@@ -10,6 +10,8 @@ public class Main {
     static int min = 0;
     static int hour = 0;
     public static String time = "";
+    public static TimerTask timerTask;
+
 
     /***
      * Constructeur de Main
@@ -17,7 +19,7 @@ public class Main {
      * @param args String[]
      */
     public static void main(String[] args){
-        TimerTask timerTask = new TimerTask() {
+        timerTask = new TimerTask() {
             @Override
             public void run() {
                 time = "Temps: " + hour + "h " + min + "min " + sec + "sec";

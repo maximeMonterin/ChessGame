@@ -19,6 +19,8 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
     private final JLabel joueur;
     private final JLabel info;
     public static JLabel timer = new JLabel(Main.time);
+
+    public boolean finDuJeu = false;
     private int compteurDeplacement = 0;
     private int positionActuelleX;
     private int positionActuelleY;
@@ -44,7 +46,7 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
         joueur.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
 
         info = new JLabel("");
-        info.setBounds(350,920, 500, 20);
+        info.setBounds(300,920, 700, 20);
         info.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
         timer.setBounds(300,10, 500, 30);
@@ -77,6 +79,9 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(finDuJeu){
+            this.setVisible(false);
+        }
         ++compteurDeplacement;
         int positionX= (e.getY()-80);
         int positionY= (e.getX()-100);
@@ -103,9 +108,9 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                         plateauDeJeu.mangerPiece(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                     } else {
                                         if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Fou || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine)
-                                            plateauDeJeu.collisionTour_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
-                                        else if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Tour)
                                             plateauDeJeu.collisionFou_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
+                                        else if(plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Reine || plateauDeJeu.getPlateau().get(positionX/100).get(positionY/100) instanceof Tour)
+                                            plateauDeJeu.collisionTour_Reine(tmp.getPosx(), tmp.getPosy(), caseRoiPossible, positionX / 100, positionY / 100);
                                     }
                                     if (caseRoiPossible.contains(tmp) && piece instanceof Roi && (piece).getCouleurPiece() != plateauDeJeu.getPlateau().get(positionX / 100).get(positionY / 100).getCouleurPiece()) {
                                         ((Roi) piece).setEchec(true);
@@ -115,13 +120,18 @@ public class Echecs extends JFrame implements ActionListener, MouseListener {
                                         mouvementPossiblePieceEnEchec = plateauDeJeu.getMouvementProtectionRoi((piece).getCouleurPiece(), inter);
                                         if (mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossiblePieceEnEchec.isEmpty()){
                                             info.setText("Le joueur " + (( piece).getCouleurPiece() ? "Bleu" : "Beige") + " est en Echec & Mat !");
-                                            //fin de partie
+                                            joueur.setText((( piece).getCouleurPiece() ? "Beige" : "Bleu") + " gagne !!");
+                                            Main.timerTask.cancel();
+                                            timer.setText("Cliquez pour quitter la partie");
+                                            finDuJeu = true;
                                         }
                                         break;
                                     }
                                 }
                             }
-                            joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
+                            if(!finDuJeu) {
+                                joueur.setText("Au tour des " + plateauDeJeu.getJoueur());
+                            }
                             nextMouvementCases.clear();
                         } else {
                             if(plateauDeJeu.getPlateau().get(positionActuelleX).get(positionActuelleY) instanceof Roi && !mouvementPossibleRoiEnEchec.isEmpty() && mouvementPossibleRoiEnEchec.contains(new Case(positionX/100,positionY/100))) {

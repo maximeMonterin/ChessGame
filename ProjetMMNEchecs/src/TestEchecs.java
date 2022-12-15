@@ -97,17 +97,20 @@ public class TestEchecs {
     @Test
     public void testAccesseurRoi() {
         Roi roi = new Roi(true, 1, 5);
+        roi.setEchec(true);
         assertEquals(roi.getCouleurPiece(), true);
         assertEquals(roi.getNom(), "Roi");
         assertEquals(roi.getPosx(), 1);
         assertEquals(roi.getPosy(), 5);
+        assertEquals(roi.estEchec(), true);
     }
+
     @Test
     public void testAccesseurEchiquier() {
         Echiquier e = new Echiquier();
         assertEquals(e.getListeCase(0, 0), e.getPlateau().get(0).get(0).mouvement());
         assertEquals(e.getCaseActuelle(0, 0), new Case(0, 0));
-        assertEquals(e.getJoueur(), "Noirs");
+        assertEquals(e.getJoueur(), "Bleus");
     }
 
     @Test

@@ -28,7 +28,7 @@ public class Fou extends Piece {
 
     /***
      * Mouvements correspondant aux cases où pourra aller le Fou au prochain coup
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement() {

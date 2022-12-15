@@ -28,7 +28,7 @@ public class Pion extends Piece{
 
     /***
      * Mouvements correspondant aux cases où pourra aller le pion au prochain coup
-     * @return List<Case>
+     * @return ListCase
      */
     @Override
     public List<Case> mouvement(){

@@ -17,7 +17,7 @@ public class Echiquier extends JComponent {
     private final List<List<Piece>> plateau;
     private BufferedImage iconePiece;
     private int cptMouvement = 0;
-    private String joueur = "Noirs";
+    private String joueur = "Bleus";
 
     /***
      * Getter du nom du joueur qui joue
@@ -248,7 +248,7 @@ public class Echiquier extends JComponent {
      * Récupere la liste des cases où la piece en positionX et positionY peut aller au prochain coup
      * @param positionX position en x de la piece
      * @param positionY position en y de la piece
-     * @return List<Case>
+     * @return ListCase
      */
     public List<Case> getListeCase(int positionX, int positionY){
        return (plateau.get(positionX).get(positionY)).mouvement();
@@ -464,7 +464,7 @@ public class Echiquier extends JComponent {
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()) {
                 this.joueur = "Beiges";
                 ++cptMouvement;
-                retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString(); //this.joueur
+                retourInfo = plateau.get(positionActuelleX).get(positionActuelleY).getNom() +" déplacé(e) en " + prochaineCase.toString();
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosition(prochaineCase);
 
                 plateau.get(positionActuelleX).get(positionActuelleY).setPosx(positionX);
@@ -481,7 +481,6 @@ public class Echiquier extends JComponent {
             }
         }
         else {
-
             if (mouvementCasesPossibles.contains(prochaineCase) && peutManger && !plateau.get(positionActuelleX).get(positionActuelleY).getCouleurPiece()) {
                 this.joueur = "Bleus";
                 ++cptMouvement;
@@ -516,7 +515,7 @@ public class Echiquier extends JComponent {
 
     /***
      * Getter pour récuperer le plateau de jeu
-     * @return List<List<Piece>>
+     * @return ListListPiece
      */
     public List<List<Piece>> getPlateau() {
         return plateau;
@@ -527,7 +526,7 @@ public class Echiquier extends JComponent {
      * @param couleur boolean couleur du roi
      * @param positionX int position en X
      * @param positionY int position en Y
-     * @return List<Case>
+     * @return ListCase
      */
     public List<Case> getMouvementEchecRoi(boolean couleur,int positionX,int positionY){
         List<Case> mouvementRoi = new ArrayList<>();
@@ -560,8 +559,8 @@ public class Echiquier extends JComponent {
     /***
      * Récupère les mouvements associés aux pieces permettant de protéger le roi pour stopper l'échec en cours
      * @param couleur boolean couleur du roi attaqué
-     * @param interposition List<Case> cases entre le roi attaqué et la pièce qui attaque
-     * @return HashMap<Piece, Case>
+     * @param interposition ListCase cases entre le roi attaqué et la pièce qui attaque
+     * @return HashMapPiece,Case
      */
     public HashMap<Piece,Case> getMouvementProtectionRoi(boolean couleur, List<Case> interposition){
         HashMap<Piece, Case> inter = new HashMap<>();
